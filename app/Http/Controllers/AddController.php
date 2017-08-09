@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Categories;
+use App\Sites;
 
 class AddController extends Controller
 {
@@ -35,4 +36,18 @@ class AddController extends Controller
     else
         return false;
 }
+
+public function CatInSite(Request $request){
+    $res = Sites::where('nameSite','=',$request->input('site'))->get();
+    foreach ($res as $site){
+        $site->category_id = $request->input('categories');
+        if($request->input('access')){
+            $site->access = 0;
+        }
+        $site->save();
+    }
+    return redirect('/sites');
+    
+}
+
 }

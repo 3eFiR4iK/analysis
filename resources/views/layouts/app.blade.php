@@ -9,10 +9,13 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Analysis</title>
+        
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('modal/jquery.arcticmodal-0.3.min.js') }}"></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+        <link href="{{asset('modal/jquery.arcticmodal-0.3.css')}}" rel="stylesheet">
+        <link href="{{asset('css/simple.css')}}" rel="stylesheet">
         <!-- Scripts -->
         <script>
     window.Laravel = {!! json_encode([
@@ -20,6 +23,7 @@
     ]) !!}
     ;
         </script>
+                  
     </head>
     
     <body>

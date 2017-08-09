@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Sites;
-
+use App\Categories;
 
 class SitesController extends Controller
 {
@@ -21,6 +21,7 @@ class SitesController extends Controller
     
     public function show(){
         $res = Sites::where('category_id', '=', NULL)->get();
-        return view('sites',['sites'=>$res,'new'=>$this->newSite()]);
+        $categories = Categories::get();
+        return view('sites',['sites'=>$res,'new'=>$this->newSite(),'categories'=>$categories]);
     }
 }

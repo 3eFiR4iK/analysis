@@ -37,6 +37,7 @@
                         <thead style="font-weight: bold;">
                             <tr>
                                 <td>Название сайта</td>
+                                
                                 <td>Кол-во посещений</td>
                             </tr>
                         <thead>
