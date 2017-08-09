@@ -44,6 +44,7 @@ public function CatInSite(Request $request){
         if($request->input('access')){
             $site->access = 0;
         }
+        if($request->input('visible')) $site->visible=0;
         $site->save();
     }
     return redirect('/sites');
