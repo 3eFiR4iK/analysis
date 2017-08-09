@@ -34,7 +34,9 @@
                   <tr><td>&nbsp;</td><td>категория</td><td>запрещенный</td></tr>\n\
                 </thead>  \n\
                 <tbody><tr><td><a href="http://'+tag+'/" target="_blank">'+tag+'</a></td>\n\
-                <td><select name="categories">@foreach($categories as $c)\n\
+                <td><select name="categories">\n\
+                             <option disabled selected>Выберите категорию</option>\n\
+                             @foreach($categories as $c)\n\
                             <option value="{{$c->id}}">{{$c->name_category}}</option>\n\
                     @endforeach</td>\n\
                 <td><input type="checkbox" name="access"></td></td>\n\
