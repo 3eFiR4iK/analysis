@@ -37,8 +37,10 @@
                         <thead style="font-weight: bold;">
                             <tr>
                                 <td>Название сайта</td>
-                                
                                 <td>Кол-во посещений</td>
+                                <td>Категория</td>
+                                <td>Доступ</td>
+                                <td>Видимость</td>
                             </tr>
                         <thead>
                         <tbody>
@@ -46,6 +48,17 @@
                             <tr>
                                 <td>{{$v2['site']}}</td>
                                 <td>{{$v2['count']}}</td>
+                                <td>{{$v2['category']}}</td>
+                                @if($v2['access'] == 1)
+                                <td>Да</td>
+                                @else
+                                <td>Нет</td>
+                                @endif
+                                @if($v2['visible'] == 1)
+                                <td>Да</td>
+                                @else
+                                <td>Нет</td>
+                                @endif
                             </tr>
 
                             @endforeach
