@@ -16,3 +16,4 @@ Route::post('/addCategory','AddController@addCategory');
 Route::post('/sites/add','AddController@CatInSite');
 Route::get('/sites','SitesController@show');
 Route::post('/import','ImportController@import');
+Route::post('/export','ExportController@export');

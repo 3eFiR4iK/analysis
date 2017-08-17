@@ -1,0 +1,1 @@
+C:\OpenServer\modules\database\MySQL-5.5\bin\mysql.exe -uroot -e "use analysis;set global group_concat_max_len=4294967294;"

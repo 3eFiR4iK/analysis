@@ -50,7 +50,7 @@
                     <div class="collapse navbar-collapse" id="app-navbar-collapse" >
                          <ul class="nav navbar-nav">                 
                             <li><a href="#myModal" class="button16" data-toggle="modal">Import файла</a></li>
-                            <li><a href="/export" class="button16">Export</a></li>
+                            <li><a href="#myModal3" class="button16" data-toggle="modal">Export</a></li>
                             <li><a href="#myModal2" class="button16" data-toggle="modal">Добавить категорию</a></li>
                         </ul>
                     
@@ -108,6 +108,44 @@
                       <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                       {{ csrf_field() }}
                       <button type="submit" class="btn btn-primary">Сохранить</label>
+                    </div>
+                  </div>
+                </div>
+                    </form>
+            </div>
+            
+            <div id="myModal3" class="modal fade">
+                <form method="post" action="/export">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title">Экспорт</h4>
+                    </div>
+                    <!-- Основное содержимое модального окна -->
+                    <div class="modal-body">
+                        <select class="form-control" name="mounth">
+                             <option disabled selected>Выберите месяц</option>
+                             <option value="1">январь</option>
+                             <option value="2">февраль</option>
+                             <option value="3">март</option>
+                             <option value="4">апрель</option>
+                             <option value="5">май</option>
+                             <option value="6">июнь</option>
+                             <option value="7">июль</option>
+                             <option value="8">август</option>
+                             <option value="9">сентябрь</option>
+                             <option value="10">октябрь</option>
+                             <option value="11">ноябрь</option>
+                             <option value="12">декабрь</option>
+                        </select>
+                    </div>
+                    <!-- Футер модального окна -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                      {{ csrf_field() }}
+                      <button type="submit" class="btn btn-primary">Выполнить</label>
                     </div>
                   </div>
                 </div>
