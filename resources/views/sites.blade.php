@@ -74,7 +74,7 @@
     }
     var access = $(this).find('#site').attr('access');
     var visible = $(this).find('#site').attr('visible');
-    alert(access);
+    
     c.html('<form method="POST" action="/sites/add">\n\
             <table class="table table-hover">\n\
                 <thead>\n\
@@ -86,7 +86,7 @@
                              @foreach($categories as $c)\n\
                             <option value="{{$c->id}}">{{$c->name_category}}</option>\n\
                     @endforeach</td>\n\
-                <td><input type="checkbox" name="access" checked="'+access+'"></td><td><input type="checkbox" name="visible" checked="'+visible+'"></td>\n\
+                <td><input type="checkbox" name="access" ></td><td><input type="checkbox" name="visible"></td>\n\
             <tr></tbody>{{ csrf_field() }}\n\
            </table><input type="hidden" name="site" value="' + site + '">\n\
                      <button type="submit" class="btn btn-primary">Сохранить \n\
