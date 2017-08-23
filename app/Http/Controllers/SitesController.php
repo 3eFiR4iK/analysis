@@ -19,9 +19,15 @@ class SitesController extends Controller
         return $count;
     }
     
-    public function show(){
+    public function getAllSites(){
+        $res = Sites::with('categories')->where('category_id','<>','0')->get();
+        return $res;
+    }
+
+
+    public function show(){ 
         $res = Sites::where('category_id', '=', 0)->get();
         $categories = Categories::get();
-        return view('sites',['sites'=>$res,'new'=>$this->newSite(),'categories'=>$categories]);
+        return view('sites',['sites'=>$res,'new'=>$this->newSite(),'categories'=>$categories,'old'=>$this->getAllSites()]);
     }
 }
