@@ -44,12 +44,21 @@ class ExportController extends Controller {
     
     protected function getSites($mounth){
         $sites = collect();
+        if($mounth){
         $res = DB::table('sites')->select('visits.date', DB::raw("group_concat(sites.nameSite,' ',visits.count,' ',sites.category_id,' ',sites.access,' ',sites.visible) as visits"))
                         ->join('visits', 'visits.id_site', '=', 'sites.id')
                         ->where('visits.date', '>=', date('Y') . '-' . $mounth . '-01')
                         ->where('visits.date', '<=', date('Y') . '-' . $mounth . '-31')
                         ->where('sites.visible','=','1')
                         ->groupBy('visits.date')->get();
+        } else {
+        $res = DB::table('sites')->select('visits.date', DB::raw("group_concat(sites.nameSite,' ',visits.count,' ',sites.category_id,' ',sites.access,' ',sites.visible) as visits"))
+                        ->join('visits', 'visits.id_site', '=', 'sites.id')
+                        ->where('visits.date', '>=', date("Y-m-d"))
+                        ->where('sites.visible','=','1')
+                        ->where('sites.access','=','0')
+                        ->groupBy('visits.date')->get();            
+        }
         $collection = collect();
         $collect = collect();
         foreach ($res as $k => $v) {
@@ -57,7 +66,7 @@ class ExportController extends Controller {
 
             foreach ($array as $k2 => $v2) {
                 $foo = explode(' ', $v2);
-                $collection->push(['site' => $foo[0], 'count' => $foo[1], 'category' => $this->getCategory($foo[2]), 'access' => $foo[3], 'visible' => $foo[4]]);
+                $collection->push(['site' => $foo[0], 'count' => $foo[1], 'category' => $this->getCategory($foo[2]), 'access' => ($foo[3]==1)?'разрешен':'нет', 'visible' => $foo[4]]);
             }
             $sort = $collection->sortByDesc('count');
             $collect->push($sort->values()->all());
@@ -105,5 +114,7 @@ class ExportController extends Controller {
             }
         }
     }
+    
+    public function thisDay(){}
 
 }

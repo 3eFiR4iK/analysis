@@ -145,7 +145,8 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                       {{ csrf_field() }}
-                      <button type="submit" class="btn btn-primary">Выполнить</label>
+                      <a href="/export/thisday" class="btn btn-primary">за сегодняшний день</a>
+                      <button type="submit" class="btn btn-primary">Выполнить</button>
                     </div>
                   </div>
                 </div>
