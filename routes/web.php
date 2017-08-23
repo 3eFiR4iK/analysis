@@ -18,3 +18,4 @@ Route::get('/sites','SitesController@show');
 Route::post('/import','ImportController@import');
 Route::get('/export/thisday','ExportController@thisDay');
 Route::post('/export','ExportController@export');
+Route::post('/delete','SitesController@deleteCategory');

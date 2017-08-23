@@ -38,7 +38,7 @@ class HomeController extends Controller
             $collect->push(['date'=>$v->date,$sort->values()->all()]);
             $collection = collect();
         }
-        return view('home',['sites'=>$collect,'paginate' => $res,'new'=>$this->newSite()]);
+        return view('home',['sites'=>$collect,'paginate' => $res,'new'=>$this->newSite(),'categories'=> \App\Http\Controllers\SitesController::getCategories()]);
     }
     
     protected function getCategory($cat){

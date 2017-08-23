@@ -23,11 +23,22 @@ class SitesController extends Controller
         $res = Sites::with('categories')->where('category_id','<>','0')->get();
         return $res;
     }
-
+    
+    public static function getCategories(){
+        $categories = Categories::get();
+        return $categories;
+    }
 
     public function show(){ 
         $res = Sites::where('category_id', '=', 0)->get();
-        $categories = Categories::get();
-        return view('sites',['sites'=>$res,'new'=>$this->newSite(),'categories'=>$categories,'old'=>$this->getAllSites()]);
+        
+        return view('sites',['sites'=>$res,'new'=>$this->newSite(),'categories'=>$this->getCategories(),'old'=>$this->getAllSites()]);
+    }
+    
+    public function deleteCategory(Request $request){
+        if ($request->input('category')){
+            Categories::where('id','=',$request->input('category'))->delete();
+        }
+        return back();
     }
 }

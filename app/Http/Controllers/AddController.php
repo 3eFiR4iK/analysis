@@ -40,6 +40,7 @@ class AddController extends Controller
 public function CatInSite(Request $request){
     $res = Sites::where('nameSite','=',$request->input('site'))->get();
     foreach ($res as $site){
+        if($request->input('categories')!=NULL)
         $site->category_id = $request->input('categories');
         if($request->input('access')){
             $site->access = 0;
