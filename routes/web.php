@@ -19,3 +19,10 @@ Route::post('/import','ImportController@import');
 Route::get('/export/thisday','ExportController@thisDay');
 Route::post('/export','ExportController@export');
 Route::post('/delete','SitesController@deleteCategory');
+
+//-----journal liot------//
+
+Route::get('/journal','JournalHomeController@show');
+Route::post('/journal/addcategory','JournalAddController@addCategory');
+Route::post('/journal/addevent','JournalAddController@addEvent');
+Route::post('/journal/addjob','JournalAddController@addJob');

@@ -49,134 +49,69 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Analysis
+                    <a class="navbar-brand" href="{{ url('/journal') }}">
+                        Журнал ЛИОТ
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse" >
                     <ul class="nav navbar-nav">                 
-                        <li><a href="#myModal" class="button16" data-toggle="modal">Import файла</a></li>
-                        <li><a href="#myModal3" class="button16" data-toggle="modal">Export</a></li>
-                        <li><a href="#myModal2" class="button16" data-toggle="modal">Добавить категорию</a></li>
-                        <li><a href="#myModal4" class="button16" data-toggle="modal">Удалить категорию</a></li>
-                        <li><a href="/journal" class="button16">Журнал ЛИОТ</a></li>
+                        <li><a href="#myModal" class="button16" data-toggle="modal">добавить категорию</a></li>
+                        <li><a href="#myModal3" class="button16" data-toggle="modal">добавить действие</a></li>
+                        <li><a href="#myModal2" class="button16" data-toggle="modal">Добавить проделаную работу</a></li>
                     </ul>
-
-
-                    <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
-                        <li>
-                            <a href="/sites">Новых сайтов <span style="color:red">{{$new}}</span></a>
-                        </li>
+                </div>        
+            </nav> 
+            <div class="col-md-2" style="border-right: 1px solid black">
+                    <ul>
+                        <li>По сотруднику</li>
+                        <li>Все подряд</li>
                     </ul>
                 </div>
-        </div>
-
-    </nav>
-    <!-- модальное окно -->
+                <div class="col-md-10">@yield('content')</div>
+</div>
+ <!-- модальное окно -->
     <div id="myModal" class="modal fade">
-        <form enctype="multipart/form-data" method="post" id="upload" action="/import">
+        <form method="post" id="upload" action="/journal/addcategory">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Заголовок модального окна -->
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Введите дату</h4>
+                        <h4 class="modal-title">Введите категорию</h4>
                     </div>
                     <!-- Основное содержимое модального окна -->
                     <div class="modal-body">
-                        <input type="date" class="form-control" name="date">
+                        <input type="text" class="form-control" name="nameCategory">
                     </div>
                     <!-- Футер модального окна -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                         {{ csrf_field() }}
-                        <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="f" id="f" onchange="document.getElementById('upload').submit()" style="display: none;">
-                        <label for="f" class="btn btn-primary">Сохранить</label>
+                        
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-
-    <div id="myModal2" class="modal fade">
-        <form method="post" id="upload" action="/addCategory">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Заголовок модального окна -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Введите название категории</h4>
-                    </div>
-                    <!-- Основное содержимое модального окна -->
-                    <div class="modal-body">
-                        <input type="text" class="form-control" name="name">
-                    </div>
-                    <!-- Футер модального окна -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        {{ csrf_field() }}
-                        <button type="submit" class="btn btn-primary">Сохранить</label>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
+ 
     <div id="myModal3" class="modal fade">
-        <form method="post" action="/export">
+        <form method="post" id="upload" action="/journal/addevent">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Заголовок модального окна -->
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Экспорт</h4>
+                        <h4 class="modal-title">Введите действие</h4>
                     </div>
                     <!-- Основное содержимое модального окна -->
                     <div class="modal-body">
-                        <select class="form-control" name="mounth">
-                            <option disabled selected>Выберите месяц</option>
-                            <option value="1">январь</option>
-                            <option value="2">февраль</option>
-                            <option value="3">март</option>
-                            <option value="4">апрель</option>
-                            <option value="5">май</option>
-                            <option value="6">июнь</option>
-                            <option value="7">июль</option>
-                            <option value="8">август</option>
-                            <option value="9">сентябрь</option>
-                            <option value="10">октябрь</option>
-                            <option value="11">ноябрь</option>
-                            <option value="12">декабрь</option>
-                        </select>
-                    </div>
-                    <!-- Футер модального окна -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        {{ csrf_field() }}
-                        <a href="/export/thisday" class="btn btn-primary">за сегодняшний день</a>
-                        <button type="submit" class="btn btn-primary">Выполнить</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    
-       <div id="myModal4" class="modal fade">
-        <form method="post" action="/delete">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Заголовок модального окна -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Удаление категории</h4>
-                    </div>
-                    <!-- Основное содержимое модального окна -->
-                    <div class="modal-body">
-                        <select class="select" name="category" style="width:100%">
+                        <input type="text" class="form-control" name="nameEvent"><br>
+                        <select name="idCategory" class="form-control">
                             <option disabled selected>выберете категорию</option>
                             @foreach($categories as $c)
-                            <option value="{{$c->id}}">{{$c->name_category}}</option>
+                              <option value="{{$c->id}}">{{$c->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -184,16 +119,52 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-primary">Удалить</button>
+                        
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+     <div id="myModal2" class="modal fade">
+        <form method="post" id="upload" action="/journal/addjob">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Добавить проделаную работу</h4>
+                    </div>
+                    <!-- Основное содержимое модального окна -->
+                    <div class="modal-body">
+                        <select name="idEvent" class="form-control">
+                            <option disabled selected>выберете действие</option>
+                            @foreach($events as $e)
+                              <option value="{{$e->id}}">{{$e->name}}</option>
+                            @endforeach
+                        </select><br>
+                        <select name="idUser" class="form-control">
+                            <option disabled selected>выберете сотрудника</option>
+                            @foreach($users as $u)
+                              <option value="{{$u->id}}">{{$u->name}}</option>
+                            @endforeach
+                        </select><br>
+                        <input type="number" class="form-control" name="count"><br>
+                        <input type="date" class="form-control" name="date">
+                    </div>
+                    <!-- Футер модального окна -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        {{ csrf_field() }}
+                        
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 
-    @yield('content')
-
-</div>
 
 <!-- Scripts -->
 
