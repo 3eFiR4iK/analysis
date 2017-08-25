@@ -26,3 +26,4 @@ Route::get('/journal','JournalHomeController@show');
 Route::post('/journal/addcategory','JournalAddController@addCategory');
 Route::post('/journal/addevent','JournalAddController@addEvent');
 Route::post('/journal/addjob','JournalAddController@addJob');
+Route::get('/journal/employee','JournalEmployeeController@show');

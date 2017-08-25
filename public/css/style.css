@@ -1,0 +1,11 @@
+
+.left-menu{
+    border-right: 1px solid #dce1e5;
+    height: 93vh;
+    margin-top: 51px;
+    background-color: #f1f5f9;
+}
+
+.left-menu > ul{
+    padding-top:18px;
+}

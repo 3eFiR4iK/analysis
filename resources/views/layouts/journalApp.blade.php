@@ -16,6 +16,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{asset('modal/jquery.arcticmodal-0.3.css')}}" rel="stylesheet">
         <link href="{{asset('css/simple.css')}}" rel="stylesheet">
+        <link href="{{asset('css/style.css')}}" rel="stylesheet">
         <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet">
         <script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
         <!-- Scripts -->
@@ -36,7 +37,7 @@
     <body>
 
         <div id="app">
-            <nav class="navbar navbar-default navbar-static-top">
+            <nav class="navbar navbar-default navbar-fixed-top">
 
                 <div class="navbar-header">
 
@@ -62,11 +63,14 @@
                     </ul>
                 </div>        
             </nav> 
-            <div class="col-md-2" style="border-right: 1px solid black">
-                    <ul>
-                        <li>По сотруднику</li>
-                        <li>Все подряд</li>
-                    </ul>
+            <div class="col-md-2 left-menu">
+                <ul class="nav">
+                        <li class="nav-header">Главные ссылки</li>
+                        <li class="active"><a href="/journal/employee">Сотрудники</a></li>
+                        <li><a href="#">Категории</a></li>
+                        <li class="nav-divider"></li>
+                        <li><a href="#">Export to Word</a></li>
+                </ul>
                 </div>
                 <div class="col-md-10">@yield('content')</div>
 </div>
