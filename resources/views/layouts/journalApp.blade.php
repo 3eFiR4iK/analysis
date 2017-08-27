@@ -67,12 +67,12 @@
                 <ul class="nav">
                         <li class="nav-header">Главные ссылки</li>
                         <li class="active"><a href="/journal/employee">Сотрудники</a></li>
-                        <li><a href="#">Категории</a></li>
+                        <li><a href="/journal/">Категории</a></li>
                         <li class="nav-divider"></li>
-                        <li><a href="#">Export to Word</a></li>
+                        <li><a href="/journal/export">Export to Word</a></li>
                 </ul>
                 </div>
-                <div class="col-md-10">@yield('content')</div>
+            <div class="col-md-10" style="margin-top:8vh">@yield('content')</div>
 </div>
  <!-- модальное окно -->
     <div id="myModal" class="modal fade">
@@ -168,8 +168,25 @@
             </div>
         </form>
     </div>
+ 
 
 
+<script>
+
+    $(document).ready(function(){
+      $('.list-group-item').click(function(){
+        href = $(this).attr('link');
+        $('#content').empty();
+        $.ajax({
+         url: href,
+         type: "get",
+         success: function(data){
+         $('#content').prepend(data);
+         }
+      });
+    });});
+
+</script>
 <!-- Scripts -->
 
 </body>

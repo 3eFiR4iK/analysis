@@ -18,12 +18,18 @@ class JournalHomeController extends Controller
         return JournalEvent::get();
     }
     public static function getUsers(){
-        return JournalUser::get();
+        return JournalUser::orderBy('name')->get();
     }
     
-    public function show(){
+    public function show($dat = NULL){
         return view('journalHome',['categories'=> $this->getCategories(),
             'events'=> $this->getEvents(),
             'users'=>$this->getUsers()]);
+    }
+    
+    public function getEventsInCategory($id){
+        $cat = JournalCategory::find($id);
+        $res = JournalEvent::with('categories')->where('category_id', '=', $id)->get();
+        return view('layouts.resultCategories',['category'=>$res,'catName'=>$cat]);
     }
 }
