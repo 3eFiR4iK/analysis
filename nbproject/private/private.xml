@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/OpenServer/domains/analysis/resources/views/sites.blade.php</file>
-            <file>file:/C:/OpenServer/domains/analysis/resources/views/journalHome.blade.php</file>
-            <file>file:/C:/OpenServer/domains/analysis/app/Http/Controllers/JournalHomeController.php</file>
-            <file>file:/C:/OpenServer/domains/analysis/resources/views/layouts/resultEmployee.blade.php</file>
+            <file>file:/C:/OpenServer/domains/analysis/app/JournalEvent.php</file>
+            <file>file:/C:/OpenServer/domains/analysis/app/Http/Controllers/JournalExportController.php</file>
             <file>file:/C:/OpenServer/domains/analysis/app/JournalUser_Event.php</file>
             <file>file:/C:/OpenServer/domains/analysis/resources/views/layouts/journalApp.blade.php</file>
             <file>file:/C:/OpenServer/domains/analysis/app/Http/Controllers/JournalEmployeeController.php</file>
-            <file>file:/C:/OpenServer/domains/analysis/resources/views/journalEmployee.blade.php</file>
             <file>file:/C:/OpenServer/domains/analysis/routes/web.php</file>
         </group>
     </open-files>
