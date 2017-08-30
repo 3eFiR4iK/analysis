@@ -16,4 +16,7 @@ class JournalUser_Event extends Model
     public function event(){
         return $this->belongsTo(\App\JournalEvent::class,'event_id');
     }
+    public function rooms(){
+        return $this->belongsTo(\App\JournalRoom::class,'room_id');
+    }
 }

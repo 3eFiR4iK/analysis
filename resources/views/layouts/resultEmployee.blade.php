@@ -7,7 +7,9 @@
                 <thead style="font-weight: bold;">
                     <tr>
                         <td>Название</td>
+                        <td>Кабинет</td>
                         <td>Кол-во</td>
+                        <td>Коментарий</td>
                         <td>Дата</td>
                     </tr>
                 <thead>
@@ -15,7 +17,9 @@
                     @foreach($users_event as $uv)                         
                     <tr>
                         <td>{{$uv->event->name}}</td>
+                        <td>{{$uv->rooms->name}}</td>
                         <td>{{$uv->count}}</td>
+                        <td>{{$uv->comment}}</td>
                         <td>{{$uv->date}}</td>
                     </tr>
                     @endforeach

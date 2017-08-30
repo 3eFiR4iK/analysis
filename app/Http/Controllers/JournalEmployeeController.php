@@ -22,7 +22,7 @@ class JournalEmployeeController extends Controller
     
     public function getEventsUser($id){
         
-        $res['data'] = user_event::with('users','event')->where('user_id','=',$id)->orderBy('date','desc')->get();
+        $res['data'] = user_event::with('users','event','rooms')->where('user_id','=',$id)->orderBy('date','desc')->get();
         $res['userName'] = users::find($id); 
         
         return view('layouts.resultEmployee',['users_event'=>$res['data'],

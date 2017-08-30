@@ -59,7 +59,7 @@
                     <ul class="nav navbar-nav">                 
                         <li><a href="#myModal" class="button16" data-toggle="modal">добавить категорию</a></li>
                         <li><a href="#myModal3" class="button16" data-toggle="modal">добавить действие</a></li>
-                        <li><a href="#myModal2" class="button16" data-toggle="modal">Добавить проделаную работу</a></li>
+                        <li><a href="/journal/job" class="button16" data-toggle="modal">Добавить проделаную работу</a></li>
                     </ul>
                 </div>        
             </nav> 
@@ -131,43 +131,7 @@
         </form>
     </div>
     
-     <div id="myModal2" class="modal fade">
-        <form method="post" id="upload" action="/journal/addjob">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Заголовок модального окна -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Добавить проделаную работу</h4>
-                    </div>
-                    <!-- Основное содержимое модального окна -->
-                    <div class="modal-body">
-                        <select name="idEvent" class="form-control">
-                            <option disabled selected>выберете действие</option>
-                            @foreach($events as $e)
-                              <option value="{{$e->id}}">{{$e->name}}</option>
-                            @endforeach
-                        </select><br>
-                        <select name="idUser" class="form-control">
-                            <option disabled selected>выберете сотрудника</option>
-                            @foreach($users as $u)
-                              <option value="{{$u->id}}">{{$u->name}}</option>
-                            @endforeach
-                        </select><br>
-                        <input type="number" class="form-control" name="count"><br>
-                        <input type="date" class="form-control" name="date">
-                    </div>
-                    <!-- Футер модального окна -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        {{ csrf_field() }}
-                        
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+    
  
 
 

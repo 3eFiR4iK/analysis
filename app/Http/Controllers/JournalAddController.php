@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\JournalCategory;
 use App\JournalEvent;
 use App\JournalUser_Event;
+use App\Http\Controllers\JournalHomeController as data ;
 
 class JournalAddController extends Controller
 {
@@ -27,6 +28,11 @@ class JournalAddController extends Controller
         }
         return back();
     }
+    
+    public function showAddjob(){
+        return view('journalJob',['users'=>data::getUsers(),'events'=>data::getEvents(),'rooms'=>data::getRooms(),'categories'=>data::getCategories()]);
+    }
+    
     public function addjob(Request $request){
         dump($request);
         if($request->input('idEvent') &&
@@ -38,6 +44,8 @@ class JournalAddController extends Controller
               $user_event->event_id = $request->input('idEvent');
               $user_event->count = $request->input('count');
               $user_event->date = $request->input('date');
+              $user_event->comment = $request->input('comment');
+              $user_event->room_id = $request->input('idRoom');
               $user_event->save();
               $this->addCountInEvent($request->input('idEvent'), $request->input('count'));
             }

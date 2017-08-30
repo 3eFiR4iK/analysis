@@ -23,6 +23,7 @@ Route::post('/delete','SitesController@deleteCategory');
 //-----journal liot------//
 
 Route::get('/journal','JournalHomeController@show');
+Route::get('journal/job','JournalAddController@showAddJob');
 Route::get('/journal/{id}','JournalHomeController@getEventsInCategory')->where('id','[0-9]+');
 Route::post('/journal/addcategory','JournalAddController@addCategory');
 Route::post('/journal/addevent','JournalAddController@addEvent');

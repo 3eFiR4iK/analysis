@@ -7,18 +7,23 @@ use App\Http\Controllers\Controller;
 use App\JournalCategory;
 use App\JournalEvent;
 use App\JournalUser;
+use App\JournalRoom;
 
 class JournalHomeController extends Controller
 {
     
     public static function getCategories(){
-        return JournalCategory::get();
+        return JournalCategory::orderBy('name')->get();
     }
     public static function getEvents(){
-        return JournalEvent::get();
+        return JournalEvent::orderBy('name')->get();
     }
     public static function getUsers(){
         return JournalUser::orderBy('name')->get();
+    }
+    
+    public static function getRooms(){
+        return JournalRoom::orderBy('name')->get();
     }
     
     public function show($dat = NULL){
