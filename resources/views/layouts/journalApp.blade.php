@@ -56,10 +56,11 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse" >
-                    <ul class="nav navbar-nav">                 
+                    <ul class="nav navbar-nav">       
+                        <li><a href="/journal/job" class="button16" data-toggle="modal">Добавить проделаную работу</a></li>
                         <li><a href="#myModal" class="button16" data-toggle="modal">добавить категорию</a></li>
                         <li><a href="#myModal3" class="button16" data-toggle="modal">добавить действие</a></li>
-                        <li><a href="/journal/job" class="button16" data-toggle="modal">Добавить проделаную работу</a></li>
+                        <li><a href="#myModal2" class="button16" data-toggle="modal">Добавить кабинет</a></li>
                     </ul>
                 </div>        
             </nav> 
@@ -87,6 +88,30 @@
                     <!-- Основное содержимое модального окна -->
                     <div class="modal-body">
                         <input type="text" class="form-control" name="nameCategory">
+                    </div>
+                    <!-- Футер модального окна -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        {{ csrf_field() }}
+                        
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+ <div id="myModal2" class="modal fade">
+        <form method="post" id="upload" action="/journal/addcab">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Введите название кабинета</h4>
+                    </div>
+                    <!-- Основное содержимое модального окна -->
+                    <div class="modal-body">
+                        <input type="text" class="form-control" name="nameCab">
                     </div>
                     <!-- Футер модального окна -->
                     <div class="modal-footer">

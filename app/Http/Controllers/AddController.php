@@ -52,4 +52,12 @@ public function CatInSite(Request $request){
     
 }
 
+public function addCab(Request $request){
+    
+    if ($request->input('nameCab')){
+        
+    }
+    return back();
+}
+
 }

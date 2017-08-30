@@ -28,6 +28,7 @@ Route::get('/journal/{id}','JournalHomeController@getEventsInCategory')->where('
 Route::post('/journal/addcategory','JournalAddController@addCategory');
 Route::post('/journal/addevent','JournalAddController@addEvent');
 Route::post('/journal/addjob','JournalAddController@addJob');
+Route::post ('/journal/addcab','JournalAddController@addCab');
 Route::get('/journal/employee','JournalEmployeeController@show');
 Route::get('/journal/employee/{id}','JournalEmployeeController@getEventsUser');
 Route::get('/journal/export','JournalExportController@export');

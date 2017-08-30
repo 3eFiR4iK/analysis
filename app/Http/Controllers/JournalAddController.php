@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\JournalCategory;
 use App\JournalEvent;
 use App\JournalUser_Event;
+use App\JournalRoom as room;
 use App\Http\Controllers\JournalHomeController as data ;
 
 class JournalAddController extends Controller
@@ -57,4 +58,15 @@ class JournalAddController extends Controller
         $event->count = $event->count + $count; 
         $event->save();
     }
+    
+    public function addCab(Request $request){
+    
+    if ($request->input('nameCab')){
+        $room = new room();
+        $room->name = $request->input('nameCab');
+        $room->save();
+    }
+    return back();
+}
+    
 }
