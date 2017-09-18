@@ -20,12 +20,16 @@ Route::get('/ajax','JournalHomeController@getDataAjax');
 
 //----analysis kadet-----//
 Route::get('/analysis', 'HomeController@show');
+Route::get('/analysis/prepods', 'HomeController@showPrepods');//Преподы
 Route::post('/addCategory','AddController@addCategory');
 Route::post('/sites/add','AddController@CatInSite');
 Route::get('/sites','SitesController@show');
 Route::post('/import','ImportController@import');
+Route::post('/importprepods','ImportController@importPrepods');//Преподы
 Route::get('/export/thisday','ExportController@thisDay');
 Route::post('/export','ExportController@export');
+Route::get('/pexport/thisday','ExportController@PthisDay');//Преподы
+Route::post('/pexport','ExportController@Pexport');//Преподы
 Route::post('/delete','SitesController@deleteCategory');
 
 //-----journal liot------//

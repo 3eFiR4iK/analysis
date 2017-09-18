@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Categories;
 use App\Sites;
 use App\Visits;
-
+use App\VisitsPrepods as PrepodsVisits;
 
 class ImportController extends Controller
 {
@@ -46,14 +46,14 @@ class ImportController extends Controller
         $count=0;
         foreach($file as $k => $v){
             if($this->find($v['sayt']) == true){
-                if($v['sayt'] !== ""){
+                
                 $model = new Visits();
                 $model->count = $v['poseshcheniya'];
                 $model->date = $this->date;
                 $model->id_site = $this->getSiteId($v['sayt']);
-                $model->save();}
+                $model->save();
             } else {
-                if($v['sayt'] !== ""){
+                
                 $model = new Sites();
                 $model->nameSite = $v['sayt'];
                 $model->save();
@@ -62,10 +62,10 @@ class ImportController extends Controller
                 $model2->count = $v['poseshcheniya'];
                 $model2->date = $this->date;
                 $model2->id_site = $id;
-                $model2->save();}
+                $model2->save();
             }
         }   
-        return redirect('/');
+        return back();
     }
     
 protected function find($site){
@@ -87,5 +87,37 @@ protected function getSiteId($site){
      }
      return $id;
 }
+
+    public function importPrepods (Request $request){
+        if($this->addFile($request) == true){
+           $file = Excel::load($this->fileName)->toArray();
+        }
+        
+        $id=NULL;
+        $count=0;
+        foreach($file as $k => $v){
+            if($this->find($v['sayt']) == true){
+               
+                $model = new PrepodsVisits();
+                $model->count = $v['poseshcheniya'];
+                $model->date = $this->date;
+                $model->id_site = $this->getSiteId($v['sayt']);
+                $model->save();
+            } else {
+               
+                $model = new Sites();
+                $model->nameSite = $v['sayt'];
+                $model->save();
+                $id = $model->id;
+                $model2 = new PrepodsVisits();
+                $model2->count = $v['poseshcheniya'];
+                $model2->date = $this->date;
+                $model2->id_site = $id;
+                $model2->save();
+            }
+        }   
+        dump($file);
+        return back();
+    }
 
 }

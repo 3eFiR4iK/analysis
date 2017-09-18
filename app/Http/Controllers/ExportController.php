@@ -10,7 +10,85 @@ use Maatwebsite\Excel\Facades\Excel;
 class ExportController extends Controller {
 
     protected $sites;
+    
+    //-------------------Преподы-----------------------//
+    
+        public function Pexport(Request $request) {
+       $sites = $this->getPrepodsSites($request->input('mounth'));
+       $ex = Excel::create('отчет по сайтам преподавателей за '.$request->input('mounth'),function($excel) use($sites){
+           $excel->setCompany('SPBKK');
+           $excel->sheet('Sheetname', function($sheet) use($sites){
+               $sheet->cell('A1',function ($cell){
+                    $cell->setValue('Название сайта');
+                    $cell->setAlignment('center'); 
+                    $cell->setFont(['bold'=>true]);
+                });
+                $sheet->cell('B1',function ($cell){
+                    $cell->setValue('Кол-во посещений');
+                    $cell->setAlignment('center'); 
+                    $cell->setFont(['bold'=>true]);
+                });
+                $sheet->cell('C1',function ($cell){
+                    $cell->setValue('Категория');
+                    $cell->setAlignment('center'); 
+                    $cell->setFont(['bold'=>true]);
+                });
+                $sheet->cell('D1',function ($cell){
+                    $cell->setValue('Доступ');
+                    $cell->setAlignment('center'); 
+                    $cell->setFont(['bold'=>true]);
+                });
+                $sheet->fromArray($sites, null, 'A2', true, false);    
+           });
+       })->export('xls');
+       return redirect()->back();
+    }
+    
+    protected function getPrepodsSites($mounth){
+        $sites = collect();
+        if($mounth){
+        $res = DB::table('sites')->select('visits_prepods.date', DB::raw("group_concat(sites.nameSite,' ',visits_prepods.count,' ',sites.category_id,' ',sites.access,' ',sites.visible) as visits"))
+                        ->join('visits_prepods', 'visits_prepods.id_site', '=', 'sites.id')
+                        ->where('visits_prepods.date', '>=', date('Y') . '-' . $mounth . '-01')
+                        ->where('visits_prepods.date', '<=', date('Y') . '-' . $mounth . '-31')
+                        ->where('sites.visible','=','1')
+                        ->groupBy('visits_prepods.date')->get();
+        } else {
+        $res = DB::table('sites')->select('visits_prepods.date', DB::raw("group_concat(sites.nameSite,' ',visits_prepods.count,' ',sites.category_id,' ',sites.access,' ',sites.visible) as visits"))
+                        ->join('visits_prepods', 'visits_prepods.id_site', '=', 'sites.id')
+                        ->where('visits_prepods.date', '>=', date("Y-m-d"))
+                        ->where('sites.visible','=','1')
+                        ->where('sites.access','=','0')
+                        ->groupBy('visits_prepods.date')->get();            
+        }
+        $collection = collect();
+        $collect = collect();
+        foreach ($res as $k => $v) {
+            $array = explode(',', $v->visits);
 
+            foreach ($array as $k2 => $v2) {
+                $foo = explode(' ', $v2);
+                $collection->push(['site' => $foo[0], 'count' => $foo[1], 'category' => $this->getCategory($foo[2]), 'access' => ($foo[3]==1)?'разрешен':'нет', 'visible' => $foo[4]]);
+            }
+            $sort = $collection->sortByDesc('count');
+            $collect->push($sort->values()->all());
+            $collection = collect();
+        }
+        $this->sites = $collect;
+
+        for ($i = 0; $i < $this->sites->count(); $i++) {
+            $mas = $collect[$i];
+            foreach ($mas as $k => $v) {
+                $name = $v['site'];
+                $count = $this->foundCountSites($name, $v['count'], $i);
+                $sites->push(['site' => $name, 'count' => (int)$count, 'category' => $v['category'], 'access' => $v['access']]);
+            }
+        }
+        return $sites;
+    }
+    
+    
+    //--------------------Кадеты-----------------------//
     public function export(Request $request) {
        $sites = $this->getSites($request->input('mounth'));
        $ex = Excel::create('отчет по сайтам за '.$request->input('mounth'),function($excel) use($sites){

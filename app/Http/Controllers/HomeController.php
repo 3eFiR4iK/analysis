@@ -41,6 +41,27 @@ class HomeController extends Controller
         return view('home',['sites'=>$collect,'paginate' => $res,'new'=>$this->newSite(),'categories'=> \App\Http\Controllers\SitesController::getCategories()]);
     }
     
+        public function showPrepods(){
+        $res = DB::table('sites')->select('visits_prepods.date',DB::raw("group_concat(sites.nameSite,' ',visits_prepods.count,' ',sites.category_id,' ',sites.access,' ',sites.visible) as visits"))
+                ->join('visits_prepods','visits_prepods.id_site','=','sites.id')
+                ->groupBy('visits_prepods.date')
+                ->paginate(10);
+            $collection=collect();
+            $collect = collect();
+        foreach($res as $k => $v){
+            $array = explode(',',$v->visits);
+            
+            foreach($array as $k2 => $v2){
+                $foo = explode(' ', $v2);
+                $collection->push(['site' => $foo[0],'count'=> $foo[1],'category'=>$this->getCategory($foo[2]),'access'=>$foo[3],'visible'=>$foo[4]]);  
+            }
+            $sort = $collection->sortByDesc('count');
+            $collect->push(['date'=>$v->date,$sort->values()->all()]);
+            $collection = collect();
+        }
+        return view('homePrepods',['sites'=>$collect,'paginate' => $res,'new'=>$this->newSite(),'categories'=> \App\Http\Controllers\SitesController::getCategories()]);
+    }
+    
     protected function getCategory($cat){
         if ($cat == 0){
             return "без категории";
