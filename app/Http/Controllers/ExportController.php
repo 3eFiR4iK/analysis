@@ -58,7 +58,7 @@ class ExportController extends Controller {
                         ->join('visits_prepods', 'visits_prepods.id_site', '=', 'sites.id')
                         ->where('visits_prepods.date', '>=', date("Y-m-d"))
                         ->where('sites.visible','=','1')
-                        ->where('sites.access','=','0')
+                        ->where('sites.access_prepods','=','0')
                         ->groupBy('visits_prepods.date')->get();            
         }
         $collection = collect();

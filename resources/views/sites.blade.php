@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach($sites as $site)       
                             <tr>
-                                <td id="site" access="{{$site->access}}" visible="{{$site->visible}}">{{$site->nameSite}}</td>
+                                <td id="site" access="{{$site->access}}" access_prepods="{{$site->access_prepods}}" visible="{{$site->visible}}">{{$site->nameSite}}</td>
                                 <td>&nbsp;</td>
                             </tr>
                             </form>
@@ -46,7 +46,7 @@
                         <tbody>
                             @foreach($old as $site)       
                             <tr>
-                                <td id="site" access="{{$site->access}}" visible="{{$site->visible}}">{{$site->nameSite}}</td>
+                                <td id="site" access="{{$site->access}}" access_prepods="{{$site->access_prepods}}" visible="{{$site->visible}}">{{$site->nameSite}}</td>
                                 @if($site->categories)
                                 <td id ="category">{{$site->categories->name_category}}</td>
                                 @else
@@ -79,14 +79,16 @@
                 category = 'Выберете категорию';
             }
             var access = $(this).find('#site').attr('access');
+            var access_prepods = $(this).find('#site').attr('access_prepods');
             var visible = $(this).find('#site').attr('visible');
             if (access == 0){access="checked";}else{access="";}
+            if (access_prepods == 0){access_prepods="checked";}else{access_prepods="";}
             if (visible == 0){visible="checked";}else{visible="";}
 
             c.html('<form method="POST" action="/sites/add">\n\
             <table class="table table-hover">\n\
                 <thead>\n\
-                  <tr><td>&nbsp;</td><td>категория</td><td>запрещенный</td><td>скрыть</td></tr>\n\
+                  <tr><td>&nbsp;</td><td>категория</td><td>запрещенный для кадета</td><td>запрещенный для преподавателя</td><td>скрыть</td></tr>\n\
                 </thead>  \n\
                 <tbody><tr><td><a href="http://' + site + '/" target="_blank">' + site + '</a></td>\n\
                 <td><select name="categories" class="select">\n\
@@ -95,6 +97,7 @@
                             <option value="{{$c->id}}">{{$c->name_category}}</option>\n\
                     @endforeach</td>\n\
                 <td><input type="checkbox" name="access" '+access+'></td>\n\
+                <td><input type="checkbox" name="access_prepods" '+access_prepods+'></td>\n\
                 <td><input type="checkbox" name="visible" '+visible+'></td>\n\
             <tr></tbody>{{ csrf_field() }}\n\
            </table><input type="hidden" name="site" value="' + site + '">\n\

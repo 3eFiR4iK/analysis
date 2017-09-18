@@ -44,11 +44,15 @@ public function CatInSite(Request $request){
         $site->category_id = $request->input('categories');
         if($request->input('access')){
             $site->access = 0;
-        }
-        if($request->input('visible')) $site->visible=0;
+        } else $site->access = 1;
+        if($request->input('access_prepods')){
+            $site->access_prepods = 0;
+        } else $site->access_prepods = 1;
+        if($request->input('visible')) $site->visible=0; else $site->visible=1;
         $site->save();
     }
-    return redirect('/sites');
+    //dump($request);
+   return back();
     
 }
 

@@ -9,38 +9,60 @@ use App\JournalEvent;
 use App\JournalUser;
 use App\JournalRoom;
 
-class JournalHomeController extends Controller
-{
-    
-    public static function getCategories(){
+class JournalHomeController extends Controller {
+
+    public static function getCategories() {
         return JournalCategory::orderBy('name')->get();
     }
-    public static function getEvents(){
+
+    public static function getEvents() {
         return JournalEvent::orderBy('name')->get();
     }
-    public static function getUsers(){
+
+    public static function getUsers() {
         return JournalUser::orderBy('name')->get();
     }
-    
-    public static function getRooms(){
+
+    public static function getRooms() {
         return JournalRoom::orderBy('name')->get();
     }
-    
-    public function getDataAjax(){
-        $mas['room']=self::getRooms();
-        $mas['events']=self::getEvents();
+
+    public function getDataAjax() {
+        $mas['room'] = self::getRooms();
+        $mas['events'] = self::getEvents();
         return $mas;
     }
-    
-    public function show($dat = NULL){
-        return view('journalHome',['categories'=> $this->getCategories(),
-            'events'=> $this->getEvents(),
-            'users'=>$this->getUsers()]);
+
+    public function show($dat = NULL) {
+        return view('journalHome', ['categories' => $this->getCategories(),
+            'events' => $this->getEvents(),
+            'users' => $this->getUsers()]);
     }
-    
-    public function getEventsInCategory($id){
+
+    public function getEventsInCategory($id) {
         $cat = JournalCategory::find($id);
         $res = JournalEvent::with('categories')->where('category_id', '=', $id)->get();
-        return view('layouts.resultCategories',['category'=>$res,'catName'=>$cat]);
+        return view('layouts.resultCategories', ['category' => $res, 'catName' => $cat]);
     }
+
+    public function showEdit() {
+        $mas = collect([
+            [
+                'id' => 'categories',
+                'name' => 'Категории'
+            ],
+            [
+                'id' => 'employee',
+                'name' => 'Сотрудники'
+            ],
+            [
+                'id' => 'room',
+                'name' => 'Кабинеты'
+            ]
+        ]);
+        return view('journalEdit', ['edits' => $mas, 'categories' => $this->getCategories(),
+            'events' => $this->getEvents(),
+            'users' => $this->getUsers()]);
+    }
+
 }

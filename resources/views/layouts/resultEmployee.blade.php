@@ -95,7 +95,7 @@
                     //-----------room-----------//
                     tr.find('#room').prepend("<select class='form-control' name='room'>");
                     tr.find('#room > select').prepend("<option disabled selected>" + room + "</option>");
-                    console.log(data["room"]);
+                            //console.log(data["room"]);
                     data["room"].forEach(function (elem) {
                         tr.find('#room > select').prepend("<option value=" + elem["id"] + ">" + elem["name"] + "</option>");
                     });

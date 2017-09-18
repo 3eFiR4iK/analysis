@@ -72,7 +72,7 @@
                         <li class="nav-header">Главные ссылки</li>
                         <li class="active"><a href="/journal/employee">Сотрудники</a></li>
                         <li><a href="/journal/">Категории</a></li>
-                        <li><a href="/journal/">Редактирование</a></li>
+                        <li><a href="/journal/edit">Редактирование</a></li>
                         <li class="nav-divider"></li>
                         <li><a href="/journal/export">Export to Word</a></li>
                 </ul>

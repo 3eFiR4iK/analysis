@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\JournalUser_Event as user_event;
 use App\JournalEvent;
+use App\Http\Controllers\JournalHomeController as journalData;
+use App\JournalUser as users;
+use App\JournalCategory as categories;
+use App\JournalRoom as room;
+
 
 class UpdateController extends Controller
 {
@@ -51,4 +56,62 @@ class UpdateController extends Controller
         $event->count = $event->count + $count; 
         $event->save();
     }
+    
+    public function updateEdit($name){
+        if ($name == 'categories'){
+        return view('layouts.resultEdit',['edit' => journalData::getCategories(),'name'=>'Категории']);}    
+        if ($name == 'employee'){
+        return view('layouts.resultEdit',['edit' => journalData::getUsers(),'name'=>'Сотрудники']);}
+        if ($name == 'room'){
+        return view('layouts.resultEdit',['edit' => journalData::getRooms(),'name'=>'Кабинеты']);}
+    }
+    
+    public function delete(Request $request){
+        if($request->input('section') == 'Категории')
+            $this->deleteCategory ($request->input('id'));
+        if($request->input('section') == 'Сотрудники')
+            $this->deleteUser ($request->input('id'));
+        if($request->input('section') == 'Кабинеты')
+            $this->deleteRoom ($request->input('id'));
+    }
+    
+    public function update(Request $request){
+
+        if($request->input('section') == 'Категории')
+            $this->updateCategory ($request->input('id'), $request->input('name'));
+        if($request->input('section') == 'Сотрудники')
+            $this->updateUser ($request->input('id'), $request->input('name'));
+        if($request->input('section') == 'Кабинеты')
+            $this->updateRoom ($request->input('id'), $request->input('name'));
+    }
+    
+    protected function updateCategory($id,$name){
+        $category = categories::find($id);
+        $category->name = $name;
+        $category->save;
+    }
+    protected function updateUser($id,$name){
+        $user = users::find($id);
+        $user->name = $name;
+        $user->save();
+    }
+    protected function updateRoom($id,$name){
+        $room = room::find($id);
+        $room->name = $name;
+        $room->save();
+    }
+    
+    protected function deleteCategory($id){
+        $category = categories::find($id);
+        $category->delete();
+    }
+    protected function deleteUser($id){
+         $user = users::find($id);
+         $user->delete();
+    }
+    protected function deleteRoom($id){
+        $room = room::find($id);
+        $room->delete();
+    }
+    
 }
