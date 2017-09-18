@@ -17,8 +17,11 @@
         <link href="{{asset('modal/jquery.arcticmodal-0.3.css')}}" rel="stylesheet">
         <link href="{{asset('css/simple.css')}}" rel="stylesheet">
         <link href="{{asset('css/style.css')}}" rel="stylesheet">
+        <link href="{{asset('js/context-menu/dist/jquery.contextMenu.css')}}" rel="stylesheet">
         <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet">
         <script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
+        <script src="{{asset('js/context-menu/dist/jquery.contextMenu.js')}}"></script>
+        <script src="{{asset('js/context-menu/dist/jquery.ui.position.js')}}"></script>
         <!-- Scripts -->
                 <script type="text/javascript">
               $(document).ready(function () {
@@ -69,6 +72,7 @@
                         <li class="nav-header">Главные ссылки</li>
                         <li class="active"><a href="/journal/employee">Сотрудники</a></li>
                         <li><a href="/journal/">Категории</a></li>
+                        <li><a href="/journal/">Редактирование</a></li>
                         <li class="nav-divider"></li>
                         <li><a href="/journal/export">Export to Word</a></li>
                 </ul>
@@ -161,10 +165,12 @@
 
 
 <script>
-
+    window.link;
+    
     $(document).ready(function(){
       $('.list-group-item').click(function(){
         href = $(this).attr('link');
+        window.link = $(this).attr('link');
         $('#content').empty();
         $.ajax({
          url: href,

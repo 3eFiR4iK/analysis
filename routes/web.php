@@ -11,7 +11,15 @@
 |
 */
 
-Route::get('/', 'HomeController@show');
+
+Route::get('/',function (){
+    return view('main');
+});
+
+Route::get('/ajax','JournalHomeController@getDataAjax');
+
+//----analysis kadet-----//
+Route::get('/analysis', 'HomeController@show');
 Route::post('/addCategory','AddController@addCategory');
 Route::post('/sites/add','AddController@CatInSite');
 Route::get('/sites','SitesController@show');
@@ -32,3 +40,5 @@ Route::post ('/journal/addcab','JournalAddController@addCab');
 Route::get('/journal/employee','JournalEmployeeController@show');
 Route::get('/journal/employee/{id}','JournalEmployeeController@getEventsUser');
 Route::get('/journal/export','JournalExportController@export');
+Route::post('/journal/updateempl','UpdateController@updateEmploye');
+Route::post('/journal/updateevent','UpdateController@updateEvent');

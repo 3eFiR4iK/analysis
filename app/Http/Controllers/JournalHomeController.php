@@ -26,6 +26,12 @@ class JournalHomeController extends Controller
         return JournalRoom::orderBy('name')->get();
     }
     
+    public function getDataAjax(){
+        $mas['room']=self::getRooms();
+        $mas['events']=self::getEvents();
+        return $mas;
+    }
+    
     public function show($dat = NULL){
         return view('journalHome',['categories'=> $this->getCategories(),
             'events'=> $this->getEvents(),
