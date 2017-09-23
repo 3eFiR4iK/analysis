@@ -110,9 +110,9 @@ class ComposerStaticInitc5b3413ab266a022a683d778d0aef392
     public static $prefixDirsPsr4 = array (
         'phpDocumentor\\Reflection\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            0 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
         ),
         'Zend\\Validator\\' => 
         array (
@@ -341,6 +341,7 @@ class ComposerStaticInitc5b3413ab266a022a683d778d0aef392
         'App\\Http\\Controllers\\JournalExportController' => __DIR__ . '/../..' . '/app/Http/Controllers/JournalExportController.php',
         'App\\Http\\Controllers\\JournalHomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/JournalHomeController.php',
         'App\\Http\\Controllers\\SitesController' => __DIR__ . '/../..' . '/app/Http/Controllers/SitesController.php',
+        'App\\Http\\Controllers\\UpdateController' => __DIR__ . '/../..' . '/app/Http/Controllers/UpdateController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -359,6 +360,7 @@ class ComposerStaticInitc5b3413ab266a022a683d778d0aef392
         'App\\Sites' => __DIR__ . '/../..' . '/app/Sites.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\Visits' => __DIR__ . '/../..' . '/app/Visits.php',
+        'App\\VisitsPrepods' => __DIR__ . '/../..' . '/app/VisitsPrepods.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',

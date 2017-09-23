@@ -40,7 +40,7 @@ class ImportController extends Controller
     
     public function import (Request $request){
         if($this->addFile($request) == true){
-           $file = Excel::load($this->fileName)->toArray();
+           $file = $this->deleteDouble(Excel::load($this->fileName)->toArray());
         }
         $id=NULL;
         $count=0;
@@ -88,9 +88,9 @@ protected function getSiteId($site){
      return $id;
 }
 
-    public function importPrepods (Request $request){
+public function importPrepods (Request $request){
         if($this->addFile($request) == true){
-           $file = Excel::load($this->fileName)->toArray();
+           $file = $this->deleteDouble(Excel::load($this->fileName)->toArray());
         }
         
         $id=NULL;
@@ -116,8 +116,33 @@ protected function getSiteId($site){
                 $model2->save();
             }
         }   
-        dump($file);
+        //dump($file);
         return back();
+    }
+    
+
+
+    protected function deleteDouble($array){
+        $collection = collect($array);
+        //dump($collection);
+        $count=0;
+        foreach($collection as $k => $v){
+            $find = $collection->where('sayt',$v['sayt']);
+            if(count($find) > 1){
+                $id = $find->keys()->first();
+                $name = $find[$id]['sayt'];
+                //dump($id);
+                foreach ($find as $f => $v2){                  
+                        $count += $v2['poseshcheniya'];
+                        if($f != $id)
+                         $collection->pull($f);
+                }
+                $collection[$id] = ["sayt" => $name,"poseshcheniya" => $count];
+                $count=0;
+            }
+            
+        }
+       return $collection->sortByDesc("poseshcheniya")->values()->all();
     }
 
 }

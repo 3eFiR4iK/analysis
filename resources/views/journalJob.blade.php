@@ -11,19 +11,19 @@
         <div class="panel-info">
             <div class="panel-heading"><h3 style="padding-left:5%; ">Добавить проделаную работу</h3><br></div>
         </div><br><br>
-        <select name="idEvent" class="form-control" required>
+        <select name="idEvent" class="form-control select" required>
                             <option disabled selected>выберете действие</option>
                             @foreach($events as $e)
                               <option value="{{$e->id}}">{{$e->name}}</option>
                             @endforeach
                         </select><br>
-                        <select name="idRoom" class="form-control">
+                        <select name="idRoom" class="form-control select">
                             <option disabled selected>выберете кабинет</option>
                             @foreach($rooms as $r)
                               <option value="{{$r->id}}">{{$r->name}}</option>
                             @endforeach
                         </select><br>
-                        <select name="idUser" class="form-control" required>
+                        <select name="idUser" class="form-control select" required>
                             <option disabled selected>выберете сотрудника</option>
                             @foreach($users as $u)
                               <option value="{{$u->id}}">{{$u->name}}</option>

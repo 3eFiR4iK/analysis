@@ -42,7 +42,7 @@ class HomeController extends Controller
     }
     
         public function showPrepods(){
-        $res = DB::table('sites')->select('visits_prepods.date',DB::raw("group_concat(sites.nameSite,' ',visits_prepods.count,' ',sites.category_id,' ',sites.access,' ',sites.visible) as visits"))
+        $res = DB::table('sites')->select('visits_prepods.date',DB::raw("group_concat(sites.nameSite,' ',visits_prepods.count,' ',sites.category_id,' ',sites.access_prepods,' ',sites.visible) as visits"))
                 ->join('visits_prepods','visits_prepods.id_site','=','sites.id')
                 ->groupBy('visits_prepods.date')
                 ->paginate(10);

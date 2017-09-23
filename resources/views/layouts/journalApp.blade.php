@@ -20,12 +20,15 @@
         <link href="{{asset('js/context-menu/dist/jquery.contextMenu.css')}}" rel="stylesheet">
         <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet">
         <script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
+        <link rel="stylesheet" href="{{asset('select2-bootstrap/dist/select2-bootstrap.min.css')}}">
         <script src="{{asset('js/context-menu/dist/jquery.contextMenu.js')}}"></script>
         <script src="{{asset('js/context-menu/dist/jquery.ui.position.js')}}"></script>
         <!-- Scripts -->
                 <script type="text/javascript">
               $(document).ready(function () {
-                 $( ".select" ).select2();
+                 $( ".select" ).select2({
+                     theme: 'bootstrap'
+                 });
               });
         </script>
         <script>
@@ -141,7 +144,7 @@
                     <!-- Основное содержимое модального окна -->
                     <div class="modal-body">
                         <input type="text" class="form-control" name="nameEvent"><br>
-                        <select name="idCategory" class="form-control">
+                        <select name="idCategory" class="select">
                             <option disabled selected>выберете категорию</option>
                             @foreach($categories as $c)
                               <option value="{{$c->id}}">{{$c->name}}</option>

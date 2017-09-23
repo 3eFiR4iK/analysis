@@ -87,13 +87,13 @@
                     tr.find('#date').empty();
                     
                     //------------event----------//
-                    tr.find('#event').prepend("<select class='form-control' name='event'>");
+                    tr.find('#event').prepend("<select class='form-control select' name='event'>");
                     tr.find('#event > select').prepend("<option disabled selected>" + event + "</option>");
                     data["events"].forEach(function (elem) {
                         tr.find('#event > select').prepend("<option value=" + elem["id"] + ">" + elem["name"] + "</option>");
                     });
                     //-----------room-----------//
-                    tr.find('#room').prepend("<select class='form-control' name='room'>");
+                    tr.find('#room').prepend("<select class='form-control select' name='room'>");
                     tr.find('#room > select').prepend("<option disabled selected>" + room + "</option>");
                             //console.log(data["room"]);
                     data["room"].forEach(function (elem) {
