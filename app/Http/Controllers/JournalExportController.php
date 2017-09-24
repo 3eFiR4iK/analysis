@@ -26,10 +26,11 @@ class JournalExportController extends Controller
         foreach($events as $e){
             $id = $e->category_id;
             if($lastID != $id){
-                $section->addText('4.'.$i.' '.$e->categories->name.':', $fontStyle);
+                $section->addText(htmlspecialchars('4.'.$i.' '.$e->categories->name.':'), $fontStyle);
                 $i++;
             }
-            $section->addListItem($e->name.'-'.$e->count,0,array(),$listStyle);  
+            
+            $section->addListItem(htmlspecialchars($e->name.'-'.$e->count),0,array(),$listStyle);  
             $lastID = $e->category_id;
         }
         
