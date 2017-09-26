@@ -29,6 +29,9 @@
                  $( ".select" ).select2({
                      theme: 'bootstrap'
                  });
+                 $("select[name='idUser[]']").select2({
+                     placeholder: "Выберете сотрудника"
+                 });
               });
         </script>
         <script>

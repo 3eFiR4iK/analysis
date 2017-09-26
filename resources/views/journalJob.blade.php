@@ -2,7 +2,15 @@
 
 @section('content')
 
-
+@if (count($errors) > 0)
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
 
         <div class="table-responsive">
 
@@ -23,8 +31,8 @@
                               <option value="{{$r->id}}">{{$r->name}}</option>
                             @endforeach
                         </select><br>
-                        <select name="idUser" class="form-control select" required>
-                            <option disabled selected>выберете сотрудника</option>
+                        <select name="idUser[]" placeholder="asdas" multiple="mutiple" class="form-control select" required>
+                            <option disabled >выберете сотрудника</option>
                             @foreach($users as $u)
                               <option value="{{$u->id}}">{{$u->name}}</option>
                             @endforeach

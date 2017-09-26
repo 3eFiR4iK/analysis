@@ -11,7 +11,6 @@
 |
 */
 
-use App\Http\Controllers\JournalHomeController;
 
 Route::get('/',function (){
     return view('main');

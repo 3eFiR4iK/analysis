@@ -35,23 +35,42 @@ class JournalAddController extends Controller
     }
     
     public function addjob(Request $request){
-        dump($request);
-        if($request->input('idEvent') &&
-            $request->input('idUser') &&
-            $request->input('date') &&
-            $request->input('count')){
+        //dump($request);
+        $this->validateForm($request);
+        foreach($request->input('idUser') as $k => $v){
               $user_event = new JournalUser_Event();
-              $user_event->user_id = $request->input('idUser');
+              $user_event->user_id = $v;
               $user_event->event_id = $request->input('idEvent');
               $user_event->count = $request->input('count');
               $user_event->date = $request->input('date');
               $user_event->comment = $request->input('comment');
               $user_event->room_id = $request->input('idRoom');
               $user_event->save();
-              $this->addCountInEvent($request->input('idEvent'), $request->input('count'));
-            }
+        }
+        $this->addCountInEvent($request->input('idEvent'), $request->input('count'));
             return back();
     }
+    
+    public  function validateForm(Request $request){
+        
+        $this->validate($request, [
+            'idEvent'  => 'bail|required',
+            'idUser' => 'bail|required',
+            'date' => 'bail|required',
+            'idRoom' => 'bail|required',
+            'count' => 'bail|required'
+        ]
+        , $this->messages());
+    }
+    
+    public function messages(){
+       return  ['idEvent.required'  => 'поле "Действие" обязательно для заполнения',
+            'data.required' => 'поле "дата" обязательно для заполнения',
+            'idUser.required' => 'поле "Сотрудник" обязательно для заполнения',
+            'idRoom.required' => 'поле "Кабинет" обязательно для заполнения',
+            'count.required' => 'поле "Кол-во" обязательно для заполнения'];
+    }
+    
     
     protected function addCountInEvent($id,$count){
         $event = JournalEvent::find($id);
