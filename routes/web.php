@@ -46,7 +46,7 @@ Route::get('/journal/employee/{id}','JournalEmployeeController@getEventsUser');
 Route::get('/journal/export','JournalExportController@export');
 Route::post('/journal/updateempl','UpdateController@updateEmploye');
 Route::post('/journal/updateevent','UpdateController@updateEvent');
-Route::get('/journal/edit','journalHomeController@showEdit');
+Route::get('/journal/edit','JournalHomeController@showEdit');
 Route::get('journal/edit/{name}','UpdateController@updateEdit');
 Route::post('/journal/update','UpdateController@update');
 Route::post('/journal/delete','UpdateController@delete');

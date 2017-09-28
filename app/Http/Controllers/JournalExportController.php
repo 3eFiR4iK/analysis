@@ -29,21 +29,23 @@ class JournalExportController extends Controller
                 $section->addText(htmlspecialchars('4.'.$i.' '.$e->categories->name.':'), $fontStyle);
                 $i++;
             }
-            
+            if($e->count > 0)
             $section->addListItem(htmlspecialchars($e->name.'-'.$e->count),0,array(),$listStyle);  
             $lastID = $e->category_id;
         }
         
-        header("Content-Description: File Transfer");
-        header('Content-Disposition: attachment; filename="first.docx"');
-        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-        header('Content-Transfer-Encoding: binary');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Expires: 0');
-
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($word, 'Word2007');
-        $objWriter->save("php://output");
-        
-        return back();
+       $headers = [
+	'Content-Description' => 'File Transfer',
+	'Content-Description' => 'attachment; filename="Отчет по работам.docx"',
+	'Content-Type'        => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+	'Content-Transfer-Encoding' => 'binary',
+	'Cache-Control'       => 'must-revalidate, post-check=0, pre-chek=0',
+	'Express'             => '0',
+];
+	$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($word,'Word2007');
+	ob_start();
+	$objWriter->save("php://output");
+	$file = ob_get_clean();
+	return response()->make($file,200,$headers);
     }
 }
