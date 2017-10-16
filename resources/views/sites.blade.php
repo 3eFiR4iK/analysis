@@ -103,8 +103,8 @@
                 <td><input type="checkbox" name="visible" '+visible+'></td>\n\
             <tr></tbody>{{ csrf_field() }}\n\
            </table><input type="hidden" name="site" value="' + site + '">\n\
-                     <button type="submit" class="btn btn-primary">Сохранить \n\
-                    </button> </form>    '
+                     <div style="text-align:right"><button type="submit" class="btn btn-primary">Сохранить \n\
+                    </button></div> </form>    '
                     );
             c.prepend('<div class="box-modal_close arcticmodal-close">X</div>');
             $.arcticmodal({
