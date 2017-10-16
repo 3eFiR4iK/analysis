@@ -16,6 +16,8 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{asset('modal/jquery.arcticmodal-0.3.css')}}" rel="stylesheet">
         <link href="{{asset('css/simple.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('css/bar.css')}}">
+        
         <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet">
         <script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
         <!-- Scripts -->

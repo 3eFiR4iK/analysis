@@ -1,0 +1,108 @@
+.window{
+	margin-top: 20px;
+   font-family: "Times New Roman";
+   background-color: #c0c0c0;
+   border-left: 2px solid white;
+   border-top: 2px solid white;
+   border-right: 2px solid #c0c0c0;
+   border-bottom: 2px solid #c0c0c0;
+   width: 380px;
+    height: 135px;
+   box-shadow: -1px -1px 0 0 #c0c0c0,
+                1px  1px 0 0
+
+}
+
+.status{
+	background-color: #000080;
+	color: white;
+	    width: 100%;
+    display: list-item;
+}
+
+.status > p {
+	padding-left: 3px;
+	font-weight: bold; 
+	float:left;
+	font-size: 12px;
+}
+
+.status > a{
+	float: right;
+    margin-bottom: 39px;
+    background-color: #c0c0c0;
+    margin: 2px;
+    font-size: 9px;
+    width: 15px;
+    font-family: arial;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.button{
+	float: right;
+    /* margin-bottom: 39px; */
+    /* background-color: #c0c0c0; */
+    /* margin: 2px; */
+    font-size: 14px;
+    width: 63px;
+    font-family: arial;
+    text-align: center;
+    /* font-weight: bold; */
+    height: 24px;
+    color: black;
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-right: 2%;
+    box-shadow: 1px 1px 0 0;
+}
+
+.process{
+	width: 100%;
+    display: inline-block;
+}
+
+.bar{
+	border-left: 1px solid #b0b0b0;
+    border-top: 1px solid #b0b0b0;
+    border-bottom: 1px solid #efefef;
+    border-right: 1px solid #efefef;
+    width: 280px;
+    height: 15px;
+    float: left;
+    margin-left: 4%;
+}
+
+.button > p {
+	border:1px dotted black;
+}
+
+.anim > p{
+	padding-top: 9px;
+    padding-bottom: 4px;
+    margin: 0px;
+    margin-left: 5%;
+    color: #3e3e3e;
+    font-size: 11px;
+}
+
+.anim > img
+{
+	margin-left: -8%;
+}
+
+.bar > p {
+	background-color: #000080;
+    width: 8.7px;
+    margin: 1px;
+    /* margin-left: 2px; */
+    font-size: 8px;
+    float: left;
+}

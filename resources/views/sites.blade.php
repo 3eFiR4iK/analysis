@@ -32,7 +32,6 @@
                             @endforeach
                         </tbody>    
                     </table>
-			{{$sites->links()}}
                 </div>
             </div>
             <div class="tab-pane" id="2">
@@ -58,7 +57,6 @@
                             @endforeach
                         </tbody>    
                     </table>
-		   
                 </div>
             </div>
         </div>
@@ -103,8 +101,8 @@
                 <td><input type="checkbox" name="visible" '+visible+'></td>\n\
             <tr></tbody>{{ csrf_field() }}\n\
            </table><input type="hidden" name="site" value="' + site + '">\n\
-                     <div style="text-align:right"><button type="submit" class="btn btn-primary">Сохранить \n\
-                    </button></div> </form>    '
+                     <button type="submit" class="btn btn-primary">Сохранить \n\
+                    </button> </form>    '
                     );
             c.prepend('<div class="box-modal_close arcticmodal-close">X</div>');
             $.arcticmodal({
@@ -113,4 +111,6 @@
          $( ".select" ).select2();});
     });
 </script>
+
+<script src="{{asset('js/progressBar.js')}}"></script>
 @endsection
