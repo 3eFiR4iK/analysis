@@ -33,7 +33,7 @@ Route::post('/pexport','ExportController@Pexport');//Преподы
 Route::post('/delete','SitesController@deleteCategory');
 
 //-----journal liot------//
-
+Route::get('/journal/getevents/{id}','ApiController@getEvents');
 Route::get('/journal','JournalHomeController@show');
 Route::get('journal/job','JournalAddController@showAddJob');
 Route::get('/journal/{id}','JournalHomeController@getEventsInCategory')->where('id','[0-9]+');

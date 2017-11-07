@@ -19,7 +19,13 @@
         <div class="panel-info">
             <div class="panel-heading"><h3 style="padding-left:5%; ">Добавить проделаную работу</h3><br></div>
         </div><br><br>
-        <select name="idEvent" class="form-control select" required>
+        <select name="idCategory" class="form-control select">
+            <option disabled selected>выберете категорию</option>
+            @foreach($categories as $c)
+                <option value="{{$c->id}}">{{$c->name}}</option>
+            @endforeach
+        </select><br>
+        <select name="idEvent" class="form-control select"  required>
                             <option disabled selected>выберете действие</option>
                             @foreach($events as $e)
                               <option value="{{$e->id}}">{{$e->name}}</option>
@@ -51,5 +57,29 @@
         </form>
     </div>
 
+<script>
+    
+$('document').ready(function(){
+    $('select[name=idEvent]').prop('disabled',true);
 
+    $('select[name=idCategory]').change(function(){
+        var id = $('select[name=idCategory]').serialize().split('=')[1];
+        $.ajax({
+            type: 'GET',
+            url: '/journal/getevents/'+ id,
+            success: function(data){
+                $('select[name=idEvent]').empty();
+                $.each(data,function(e){
+                    //console.log(this);
+                    $('select[name=idEvent]').append('<option value="'+this['id']+'">'+this['name']+'</option>');
+                });
+                $('select[name=idEvent]').prop('disabled',false);
+                    $('select[name=idEvent]').select2('open');
+            },
+        });
+    });
+});
+
+
+</script>
 @endsection

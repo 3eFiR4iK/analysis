@@ -25,7 +25,7 @@ class SitesController extends Controller
     }
     
     public static function getCategories(){
-        $categories = Categories::get();
+        $categories = Categories::orderBy('name_category')->get();
         return $categories;
     }
 

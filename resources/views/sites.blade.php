@@ -88,7 +88,7 @@
             c.html('<form method="POST" action="/sites/add">\n\
             <table class="table table-hover">\n\
                 <thead>\n\
-                  <tr><td>&nbsp;</td><td>категория</td><td>запрещенный для кадета</td><td>запрещенный для преподавателя</td><td>скрыть</td></tr>\n\
+                  <tr><td>&nbsp;</td><td>категория</td><td>запрет кадет</td><td>запрет препод</td><td>скрыть</td></tr>\n\
                 </thead>  \n\
                 <tbody><tr><td><a href="http://' + site + '/" target="_blank">' + site + '</a></td>\n\
                 <td><select name="categories" class="select">\n\
@@ -101,8 +101,8 @@
                 <td><input type="checkbox" name="visible" '+visible+'></td>\n\
             <tr></tbody>{{ csrf_field() }}\n\
            </table><input type="hidden" name="site" value="' + site + '">\n\
-                     <button type="submit" class="btn btn-primary">Сохранить \n\
-                    </button> </form>    '
+                    <div style="text-align:right;"> <button type="submit" class="btn btn-primary">Сохранить \n\
+                    </button></div> </form>    '
                     );
             c.prepend('<div class="box-modal_close arcticmodal-close">X</div>');
             $.arcticmodal({
