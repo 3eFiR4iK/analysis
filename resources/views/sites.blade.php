@@ -32,6 +32,7 @@
                             @endforeach
                         </tbody>    
                     </table>
+                    {{$sites->links()}}
                 </div>
             </div>
             <div class="tab-pane" id="2">

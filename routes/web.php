@@ -19,6 +19,12 @@ Route::get('/',function (){
 Route::get('/ajax','JournalHomeController@getDataAjax');
 
 //----analysis kadet-----//
+
+Route::get('/analysis/getVisits/{date}/{kadets?}','ApiController@getVisits');
+Route::get('/analysis/test/','HomeController@test');
+
+
+
 Route::get('/analysis', 'HomeController@show');
 Route::get('/analysis/prepods', 'HomeController@showPrepods');//Преподы
 Route::post('/addCategory','AddController@addCategory');
@@ -43,7 +49,8 @@ Route::post('/journal/addjob','JournalAddController@addJob');
 Route::post ('/journal/addcab','JournalAddController@addCab');
 Route::get('/journal/employee','JournalEmployeeController@show');
 Route::get('/journal/employee/{id}','JournalEmployeeController@getEventsUser');
-Route::get('/journal/export','JournalExportController@export');
+Route::get('/journal/word','JournalExportController@show');
+Route::post('/journal/export','JournalExportController@export');
 Route::post('/journal/updateempl','UpdateController@updateEmploye');
 Route::post('/journal/updateevent','UpdateController@updateEvent');
 Route::get('/journal/edit','JournalHomeController@showEdit');

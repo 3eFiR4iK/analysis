@@ -32,6 +32,15 @@
                  $("select[name='idUser[]']").select2({
                      placeholder: "Выберете сотрудника"
                  });
+                 $("select[name='idCategory[]']").select2({
+                     placeholder: "Выберете категорию"
+                 });
+                 $("select[name='idEvent[]']").select2({
+                     placeholder: "Выберете действие"
+                 });
+                 $("select[name='idRoom[]']").select2({
+                     placeholder: "Выберете кабинет"
+                 });
               });
         </script>
         <script>
@@ -80,7 +89,7 @@
                         <li><a href="/journal/">Категории</a></li>
                         <li><a href="/journal/edit">Редактирование</a></li>
                         <li class="nav-divider"></li>
-                        <li><a href="/journal/export">Export to Word</a></li>
+                        <li><a href="/journal/word">Export to Word</a></li>
                 </ul>
                 </div>
             <div class="col-md-10" style="margin-top:8vh">@yield('content')</div>

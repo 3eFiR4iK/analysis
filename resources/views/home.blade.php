@@ -71,5 +71,5 @@
         @endforeach
         {{$paginate->links()}}
     
-
+<?php dump($paginate);?>
     @endsection

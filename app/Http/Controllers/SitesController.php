@@ -20,7 +20,7 @@ class SitesController extends Controller
     }
     
     public function getAllSites(){
-        $res = Sites::with('categories')->where('category_id','<>','0')->paginate(5000);
+        $res = Sites::with('categories')->where('category_id','<>','0')->orderBy('id','desc')->paginate(5000);
         return $res;
     }
     
@@ -30,7 +30,7 @@ class SitesController extends Controller
     }
 
     public function show(){ 
-        $res = Sites::where('category_id', '=', 0)->paginate(5000);
+        $res = Sites::where('category_id', '=', 0)->orderBy('id','desc')->paginate(5000);
         
         return view('sites',['sites'=>$res,'new'=>$this->newSite(),'categories'=>$this->getCategories(),'old'=>$this->getAllSites()]);
     }

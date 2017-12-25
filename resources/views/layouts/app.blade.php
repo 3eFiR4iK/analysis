@@ -20,6 +20,7 @@
         
         <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet">
         <script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
+        <script src="{{asset('js/loadSites.js')}}"></script>
         <!-- Scripts -->
                 <script type="text/javascript">
               $(document).ready(function () {
