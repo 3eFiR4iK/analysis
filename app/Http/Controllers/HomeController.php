@@ -48,7 +48,7 @@ class HomeController extends Controller {
     public function show() {
 
         $days = Visits::groupBy('date')->orderBy('date', 'desc')->paginate(30);
-        return view('test', ['days' => $days, 'new' => $this->newSite(), 'categories' => \App\Http\Controllers\SitesController::getCategories()]);
+        return view('home', ['days' => $days, 'new' => $this->newSite(), 'categories' => \App\Http\Controllers\SitesController::getCategories()]);
 //        $res = DB::table('sites')->select('visits.date',DB::raw("group_concat(sites.nameSite,' ',visits.count,' ',sites.category_id,' ',sites.access,' ',sites.visible) as visits"))
 //                ->join('visits','visits.id_site','=','sites.id')
 //                ->groupBy('visits.date')
@@ -72,7 +72,7 @@ class HomeController extends Controller {
     public function showPrepods() {
 
         $days = VisitsPrepods::groupBy('date')->orderBy('date', 'desc')->paginate(30);
-        return view('test', ['days' => $days, 'new' => $this->newSite(), 'categories' => \App\Http\Controllers\SitesController::getCategories()]);
+        return view('home', ['days' => $days, 'new' => $this->newSite(), 'categories' => \App\Http\Controllers\SitesController::getCategories()]);
 //        $res = DB::table('sites')->select('visits_prepods.date',DB::raw("group_concat(sites.nameSite,' ',visits_prepods.count,' ',sites.category_id,' ',sites.access_prepods,' ',sites.visible) as visits"))
 //                ->join('visits_prepods','visits_prepods.id_site','=','sites.id')
 //                ->groupBy('visits_prepods.date')

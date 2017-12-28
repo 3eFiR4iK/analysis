@@ -58,8 +58,12 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse" >
-                    <ul class="nav navbar-nav">                 
+                    <ul class="nav navbar-nav">         
+                        @if(request()->getPathInfo()=='/analysis/prepods')
+                          <li><a href="/analysis" class="button16">Кадеты</a></li>
+                        @else
                          <li><a href="/analysis/prepods" class="button16">Преподаватели</a></li>
+                        @endif
                         <li><a href="#myModal" class="button16" data-toggle="modal">Import файла</a></li>
                         <li><a href="#myModal3" class="button16" data-toggle="modal">Export</a></li>
                         <li><a href="#myModal2" class="button16" data-toggle="modal">Добавить категорию</a></li>
@@ -79,7 +83,7 @@
     </nav>
     <!-- модальное окно -->
     <div id="myModal" class="modal fade">
-        <form enctype="multipart/form-data" method="post" id="upload" action="/import">
+        <form enctype="multipart/form-data" method="post" id="upload" action="{{request()->getPathInfo()=='/analysis/prepods'?'/importprepods':'/import'}}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Заголовок модального окна -->
@@ -128,7 +132,8 @@
     </div>
 
     <div id="myModal3" class="modal fade">
-        <form method="post" action="/export">
+        
+        <form method="post" action="{{request()->getPathInfo()=='/analysis/prepods'?'/pexport':'/export'}}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Заголовок модального окна -->
