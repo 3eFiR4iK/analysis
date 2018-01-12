@@ -15,13 +15,11 @@ class ApiController extends Controller
     	return events::where('category_id','=',$id)->orderBy('name')->get();
     }
     
-    public function getVisits($date = '2017-10-30',$kadets = true){
-        
-        if($kadets == true){
+    public function getVisits($date,$kadets){
+        if($kadets == 'true'){
             return visits::with('sites.categories')->where('date',$date)->get()->toJson();
-        } else {
-            return prepods::with('sites.categories')->where('date',$date)->toArray();
+        } else if($kadets == 'false'){
+            return prepods::with('sites.categories')->where('date',$date)->get()->toJson();
         }
-        return "test";
     }
 }
