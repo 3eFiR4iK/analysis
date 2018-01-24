@@ -18,11 +18,46 @@ class JournalExportController extends Controller {
     }
 
     public function export(request $request) {
-        
         $events = $this->filters($request);
-       // dump($events);
-
-        $word = $this->word($events);
+        $evenBuf=['event'    =>$events['data']->first()->name,
+                  'category' =>$events['data']->first()->event->categories->name];
+        $count = 0;
+        $wordArray = [];
+        $i = 0;
+        $end = $events['data']->count();
+        $counter = 1;
+        //dump($events['data']);
+        
+        foreach ($events['data'] as $event){
+            if($evenBuf['event'] != $event->name){
+                $wordArray += [$i=>[
+                    'category' => $evenBuf['category'],
+                    'event' => $evenBuf['event'],
+                    'count' => $count,
+                ]];
+                $i++;
+                $count = 0;
+            }
+            
+            $count += $event->counts;
+            $evenBuf['event'] = $event->name;
+            $evenBuf['category'] = $event->event->categories->name;
+            
+            if($counter++ == $end){
+                $wordArray += [$i=>[
+                    'category' => $evenBuf['category'],
+                    'event' => $evenBuf['event'],
+                    'count' => $count,
+                ]];
+                $i++;
+                $count = 0;
+            }
+        }
+//        dump(collect($wordArray)->sortBy(function($event){
+//        return sprintf('%-12s%s', $event['category'], $event['event']);}));
+        $word = $this->word(collect($wordArray)->sortBy(function($event){
+            return sprintf('%-12s%s', $event['category'], $event['event']);
+        }));
         
         $headers = [
             'Content-Description' => 'File Transfer',
@@ -40,6 +75,7 @@ class JournalExportController extends Controller {
     }
 
     protected function word($events) {
+        $lastCategory ='';
         $i = 1;
         $word = new \PhpOffice\PhpWord\PhpWord();
         $word->setDefaultFontName('Times New Roman');
@@ -52,43 +88,31 @@ class JournalExportController extends Controller {
 
         $lastID = -1;
         $section->addText('4. ТЕХНИЧЕСКАЯ ДЕЯТЕЛЬНОСТЬ', $fontStyle);
-        if ($events['filter']==true) {
-            foreach ($events['data'] as $e) {
-                $id = $e->event->category_id;
-                if ($lastID != $id) {
-                    $section->addText(htmlspecialchars('4.' . $i . ' ' . $e->event->categories->name . ':'), $fontStyle);
+        
+        foreach ($events as $e) {
+                $category = $e['category'];
+                if ($lastCategory != $category) {
+                    $section->addText(htmlspecialchars('4.' . $i . ' ' . $e['category'] . ':'), $fontStyle);
                     $i++;
                 }
-                if ($e->event->count > 0)
-                    $section->addListItem(htmlspecialchars($e->event->name . '-' . $e->counts . ' (' . $e->users->name . ' ' . $e->date . ')'), 0, array(), $listStyle);
-                $lastID = $e->event->category_id;
-            }
-        } else{
-            foreach ($events['data'] as $e) {
-                $id = $e->category_id;
-                if ($lastID != $id) {
-                    $section->addText(htmlspecialchars('4.' . $i . ' ' . $e->categories->name . ':'), $fontStyle);
-                    $i++;
-                }
-                if ($e->count > 0)
-                    $section->addListItem(htmlspecialchars($e->name . '-' . $e->count), 0, array(), $listStyle);
-                $lastID = $e->category_id;
-            }
+                if ($e['count'] > 0)
+                    $section->addListItem(htmlspecialchars($e['event'] . ' - ' . $e['count']), 0, array(), $listStyle);
+                $lastCategory = $e['category'];
         }
-
+        
         return $word;
     }
 
     protected function filters($request) {
         $events = user_event::with('users', 'event.categories', 'rooms');
         // $nameDoc = "отчет ЛИОТ";
-        
-        if($request->input('firstDate')){
+        //dump($request->input());
+        if($request->input('firstDate')!== NULL){
             $fDate = $request->input('firstDate');
             $events->where('date','>=',$fDate);
         }
         
-        if($request->input('secondDate')){
+        if($request->input('secondDate') !== NULL){
             $sDate = $request->input('secondDate');
             $events->where('date','<=',$sDate);
         }
@@ -131,7 +155,7 @@ class JournalExportController extends Controller {
             $data['filter'] = false;
             return $data;
         } else{
-            $data['data']=$events->join('event', 'users_event.event_id', '=', 'event.id')->orderBy('category_id')->get(['*', 'users_event.count as counts']);
+            $data['data']=$events->join('event', 'users_event.event_id', '=', 'event.id')->orderBy('name')->get(['*', 'users_event.count as counts']);
             $data['filter'] = true;
             return $data;
         }
