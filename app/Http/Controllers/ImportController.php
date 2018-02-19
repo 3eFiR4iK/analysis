@@ -45,6 +45,7 @@ class ImportController extends Controller
         $id=NULL;
         $count=0;
         foreach($file as $k => $v){
+echo $v;
             if($this->find($v['sayt']) == true){
                 
                 $model = new Visits();
@@ -89,10 +90,10 @@ protected function getSiteId($site){
 }
 
 public function importPrepods (Request $request){
-        if($this->addFile($request) == true){
-           $file = $this->deleteDouble(Excel::load($this->fileName)->toArray());
+        if($this->addFile($request) == true){          
+ $file = $this->deleteDouble(Excel::load($this->fileName)->toArray());
         }
-        
+        //dump($file);
         $id=NULL;
         $count=0;
         foreach($file as $k => $v){
@@ -117,7 +118,7 @@ public function importPrepods (Request $request){
             }
         }   
         //dump($file);
-        return back();
+        //return back();
     }
     
 

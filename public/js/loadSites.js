@@ -20,7 +20,7 @@ $(document).ready(function () {
 
 
 
-function getVisits(date, kadet = true, tag) {
+function getVisits(date, kadet, tag) {
 
     $.ajax({
         url: "/analysis/getVisits/" + date.slice(1) + "/" + kadet,

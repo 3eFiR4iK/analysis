@@ -90,7 +90,8 @@ class ExportController extends Controller {
     
     //--------------------Кадеты-----------------------//
     public function export(Request $request) {
-       $sites = $this->getSites($request->input('mounth'));
+ini_set("max_execution_time","1200");       
+$sites = $this->getSites($request->input('mounth'));
        $ex = Excel::create('отчет по сайтам за '.$request->input('mounth'),function($excel) use($sites){
            $excel->setCompany('SPBKK');
            $excel->sheet('Sheetname', function($sheet) use($sites){
@@ -125,8 +126,8 @@ class ExportController extends Controller {
         if($mounth){
         $res = DB::table('sites')->select('visits.date', DB::raw("group_concat(sites.nameSite,' ',visits.count,' ',sites.category_id,' ',sites.access,' ',sites.visible) as visits"))
                         ->join('visits', 'visits.id_site', '=', 'sites.id')
-                        ->where('visits.date', '>=', date('Y') . '-' . $mounth . '-01')
-                        ->where('visits.date', '<=', date('Y') . '-' . $mounth . '-31')
+                        ->where('visits.date', '>=', date('Y')-1 . '-' . $mounth . '-01')
+                        ->where('visits.date', '<=', date('Y')-1 . '-' . $mounth . '-31')
                         ->where('sites.visible','=','1')
                         ->groupBy('visits.date')->get();
         } else {
