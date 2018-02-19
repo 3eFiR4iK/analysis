@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="panel-body">
+    
     <div id="exTab2" class="container">	
         <ul class="nav nav-tabs">
             <li class="active">
@@ -26,7 +27,11 @@
                             @foreach($sites as $site)       
                             <tr>
                                 <td id="site" access="{{$site->access}}" access_prepods="{{$site->access_prepods}}" visible="{{$site->visible}}">{{$site->nameSite}}</td>
-                                <td>&nbsp;</td>
+                                @if($site->categories)
+                                <td id ="category">{{$site->categories->name_category}}</td>
+                                @else
+                                <td id ="category">&nbsp;</td>
+                                @endif
                             </tr>
                             </form>
                             @endforeach
@@ -70,9 +75,9 @@
 <script>
     $(document).ready(function () {
 
-        
+
         $('tr').click(function () {
-           
+
             var c = $('<div class="box-modal" />');
             var site = $(this).find('#site').html();
             var category = $(this).find('#category').html();
@@ -82,9 +87,21 @@
             var access = $(this).find('#site').attr('access');
             var access_prepods = $(this).find('#site').attr('access_prepods');
             var visible = $(this).find('#site').attr('visible');
-            if (access == 0){access="checked";}else{access="";}
-            if (access_prepods == 0){access_prepods="checked";}else{access_prepods="";}
-            if (visible == 0){visible="checked";}else{visible="";}
+            if (access == 0) {
+                access = "checked";
+            } else {
+                access = "";
+            }
+            if (access_prepods == 0) {
+                access_prepods = "checked";
+            } else {
+                access_prepods = "";
+            }
+            if (visible == 0) {
+                visible = "checked";
+            } else {
+                visible = "";
+            }
 
             c.html('<form method="POST" action="/sites/add">\n\
             <table class="table table-hover">\n\
@@ -97,9 +114,9 @@
                              @foreach($categories as $c)\n\
                             <option value="{{$c->id}}">{{$c->name_category}}</option>\n\
                     @endforeach</td>\n\
-                <td><input type="checkbox" name="access" '+access+'></td>\n\
-                <td><input type="checkbox" name="access_prepods" '+access_prepods+'></td>\n\
-                <td><input type="checkbox" name="visible" '+visible+'></td>\n\
+                <td><input type="checkbox" name="access" ' + access + '></td>\n\
+                <td><input type="checkbox" name="access_prepods" ' + access_prepods + '></td>\n\
+                <td><input type="checkbox" name="visible" ' + visible + '></td>\n\
             <tr></tbody>{{ csrf_field() }}\n\
            </table><input type="hidden" name="site" value="' + site + '">\n\
                     <div style="text-align:right;"> <button type="submit" class="btn btn-primary">Сохранить \n\
@@ -109,7 +126,8 @@
             $.arcticmodal({
                 content: c
             });
-         $( ".select" ).select2();});
+            $(".select").select2();
+        });
     });
 </script>
 

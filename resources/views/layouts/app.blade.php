@@ -17,15 +17,15 @@
         <link href="{{asset('modal/jquery.arcticmodal-0.3.css')}}" rel="stylesheet">
         <link href="{{asset('css/simple.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/bar.css')}}">
-        
+
         <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet">
         <script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
         <script src="{{asset('js/loadSites.js')}}"></script>
         <!-- Scripts -->
-                <script type="text/javascript">
-              $(document).ready(function () {
-                 $( ".select" ).select2();
-              });
+        <script type="text/javascript">
+            $(document).ready(function () {
+            $(".select").select2();
+            });
         </script>
         <script>
             window.Laravel = {!! json_encode([
@@ -60,19 +60,30 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse" >
                     <ul class="nav navbar-nav">         
                         @if(request()->getPathInfo()=='/analysis/prepods')
-                          <li><a href="/analysis" class="button16">Кадеты</a></li>
+                        <li><a href="/analysis" class="button16">Кадеты</a></li>
                         @else
-                         <li><a href="/analysis/prepods" class="button16">Преподаватели</a></li>
+                        <li><a href="/analysis/prepods" class="button16">Преподаватели</a></li>
                         @endif
                         <li><a href="#myModal" class="button16" data-toggle="modal">Import файла</a></li>
                         <li><a href="#myModal3" class="button16" data-toggle="modal">Export</a></li>
                         <li><a href="#myModal2" class="button16" data-toggle="modal">Добавить категорию</a></li>
                         <li><a href="#myModal4" class="button16" data-toggle="modal">Удалить категорию</a></li>
-                       
+
                     </ul>
 
 
                     <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+                        <li style=" width: 210px; padding: 6px; ">
+                            <div class="input-group">
+                                <form method="GET" action="/analysis/search" style="display: inherit">
+                                    <input type="text" name="search" class="form-control" style="width: 164px;" placeholder="поиск">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">Go!</button>
+                                </span>
+                                </form>
+                            </div><!-- /input-group -->
+
+                        </li>
                         <li>
                             <a href="/sites">Новых сайтов <span style="color:red">{{$new}}</span></a>
                         </li>
@@ -132,7 +143,7 @@
     </div>
 
     <div id="myModal3" class="modal fade">
-        
+
         <form method="post" action="{{request()->getPathInfo()=='/analysis/prepods'?'/pexport':'/export'}}">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -163,15 +174,15 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                         {{ csrf_field() }}
-                        
+
                         <button type="submit" class="btn btn-primary">Выполнить</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    
-       <div id="myModal4" class="modal fade">
+
+    <div id="myModal4" class="modal fade">
         <form method="post" action="/delete">
             <div class="modal-dialog">
                 <div class="modal-content">

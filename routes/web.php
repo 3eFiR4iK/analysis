@@ -37,7 +37,7 @@ Route::post('/export','ExportController@export');
 Route::get('/pexport/thisday','ExportController@PthisDay');//Преподы
 Route::post('/pexport','ExportController@Pexport');//Преподы
 Route::post('/delete','SitesController@deleteCategory');
-
+Route::get('/analysis/search','AnalysisSearchController@search');
 //-----journal liot------//
 Route::get('/journal/getevents/{id}','ApiController@getEvents');
 Route::get('/journal','JournalHomeController@show');

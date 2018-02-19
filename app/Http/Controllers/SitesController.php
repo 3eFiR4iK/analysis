@@ -9,7 +9,7 @@ use App\Categories;
 class SitesController extends Controller
 {
     
-     public function newSite(){
+     public static function newSite(){
         $sites = Sites::get();
         $count=0;
         foreach ($sites as $site){
@@ -19,7 +19,7 @@ class SitesController extends Controller
         return $count;
     }
     
-    public function getAllSites(){
+    public static function getAllSites(){
         $res = Sites::with('categories')->where('category_id','<>','0')->orderBy('id','desc')->paginate(5000);
         return $res;
     }
