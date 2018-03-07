@@ -45,7 +45,6 @@ class ImportController extends Controller
         $id=NULL;
         $count=0;
         foreach($file as $k => $v){
-echo $v;
             if($this->find($v['sayt']) == true){
                 
                 $model = new Visits();

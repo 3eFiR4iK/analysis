@@ -2,7 +2,7 @@
 
 sends = 0;
 allcount = -1;
-count = -1;
+count = 0;
 abort = false;
 //endglobal
 
@@ -90,18 +90,19 @@ function send(form, sitesUrl,last=0) {
         url: '/sites/add',
         data: form + '&site=' + sitesUrl[window.count],
         success: function () {
-            window.count++;
+            if(window.count == window.allcount){
+		showSite("done !");
+		window.abort = true;
+  	    }
+           if(last < 26)
             addSection(last, map(window.count, 0, window.allcount, 0, 26));
-            last = map(window.count, 0, window.allcount, 0, 26);
+            
+last = map(window.count, 0, window.allcount, 0, 26);
 
             //console.log(sitesUrl);
             showSite(window.count + " из " + sitesUrl.length + " / " + sitesUrl[window.count]);
             console.log(window.count + " из " + sitesUrl.length + " / " + sitesUrl[window.count]);
-            if (count === window.allcount) {
-                showSite("done !");
-                window.abort = true;
-            }
-
+	    window.count++;
             send(form, sitesUrl,last);
         },
         error: function (data) {

@@ -77,7 +77,7 @@
 
             var name = tr.find('#name').html();
             var section = $('div.panel-heading > h3').text();
-            tr.find('#name').empty().prepend('<input type="text" class="form-control" value="' + name + '" name="name"/>');
+            tr.find('#name').empty().prepend("<input type='text' class='form-control' value='" + name + "' name='name'/>");
 
             $('div.table-responsive > table').wrap("<form action='/journal/update' method='post' id='updateForm'></form>");
             tr.prepend("<input type='hidden' value='" + tr.attr('id') + "' name='id'> ");

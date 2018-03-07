@@ -19,7 +19,7 @@
         <i class="fa fa-check fa-lg"></i> {{request()->input('message')}}
     </div>
 @endif
-
+<h1>ПРЕПОДАВАТЕЛИ</h1>
 <div class="col-md-12 panel-group" id="accordion">
     <!-- 1 панель -->
     @foreach($sites as $v)

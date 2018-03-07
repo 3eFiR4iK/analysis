@@ -73,7 +73,7 @@
             var count = tr.find('#count').html();
             var comment = tr.find('#comment').html();
             var date = tr.find('#date').html();
-            
+            console.log(comment);
             $.ajax({
                 url: "/ajax",
                 type: "get",
@@ -101,7 +101,7 @@
                     });
 
                     tr.find('#count').prepend('<input type="number" class="form-control" value="' + count + '" name="count"/>');
-                    tr.find('#comment').prepend('<input type="text" class="form-control" value="' + comment + '" name="comment"/>');
+                    tr.find('#comment').prepend("<input type='text' class='form-control' value='" + comment + "' name='comment'/>");
                     tr.find('#date').prepend('<input type="date" class="form-control" value="' + date + '" name="date"/>');
                     $('div.table-responsive > table').wrap("<form action='/journal/updateempl' method='post' id='updateForm'></form>");
                     tr.prepend("<input type='hidden' value='"+tr.attr('id')+"' name='id'> ");
