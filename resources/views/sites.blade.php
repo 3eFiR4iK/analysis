@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="panel-body">
-    
+
     <div id="exTab2" class="container">	
         <ul class="nav nav-tabs">
             <li class="active">
@@ -81,6 +81,7 @@
             var c = $('<div class="box-modal" />');
             var site = $(this).find('#site').html();
             var category = $(this).find('#category').html();
+            console.log(category);
             if (category == undefined) {
                 category = 'Выберете категорию';
             }
@@ -109,10 +110,10 @@
                   <tr><td>&nbsp;</td><td>категория</td><td>запрет кадет</td><td>запрет препод</td><td>скрыть</td></tr>\n\
                 </thead>  \n\
                 <tbody><tr><td><a href="http://' + site + '/" target="_blank">' + site + '</a></td>\n\
-                <td><select name="categories" class="select">\n\
+                <td><select id="modalselect" name="categories" class="select">\n\
                              <option disabled selected>' + category + '</option>\n\
                              @foreach($categories as $c)\n\
-                            <option value="{{$c->id}}">{{$c->name_category}}</option>\n\
+                            <option value="{{$c->id}}" access_kadet="{{$c->access}}" access_prepods="{{$c->access_prepods}}">{{$c->name_category}}</option>\n\
                     @endforeach</td>\n\
                 <td><input type="checkbox" name="access" ' + access + '></td>\n\
                 <td><input type="checkbox" name="access_prepods" ' + access_prepods + '></td>\n\
@@ -127,7 +128,23 @@
                 content: c
             });
             $(".select").select2();
+            
+            $('#modalselect').on('select2:select', function (e) {
+                kadet = e.params.data.element.attributes.access_kadet.value;
+                prepod = e.params.data.element.attributes.access_prepods.value;
+                console.log(kadet);
+                if (kadet == 0) {
+                    $('input[name=access').attr('checked', '');
+                } else
+                    $('input[name=access]').removeAttr('checked');
+                if (prepod == 0) {
+                    $('input[name=access_prepods]').attr('checked', '');
+                } else
+                    $('input[name=access_prepods]').removeAttr('checked');
+            });
         });
+
+
     });
 </script>
 
