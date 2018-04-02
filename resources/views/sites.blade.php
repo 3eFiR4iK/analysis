@@ -37,7 +37,11 @@
                             @endforeach
                         </tbody>    
                     </table>
-                    {{$sites->links()}}
+                    @if($search !== ' ' )
+                    {{$sites->appends(['search'=>$search])->links()}}
+		   @else 
+		    {{$sites->links()}}
+		  @endif
                 </div>
             </div>
             <div class="tab-pane" id="2">
@@ -63,6 +67,11 @@
                             @endforeach
                         </tbody>    
                     </table>
+		   @if($search !== '')
+			{{$old->appends(['search'=>$search])->links()}}
+		   @else 
+			{{$old->links()}}
+		   @endif
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@ class SitesController extends Controller
     public function show(){ 
         $res = Sites::where('category_id', '=', 0)->orderBy('id','desc')->paginate(5000);
         
-        return view('sites',['sites'=>$res,'new'=>$this->newSite(),'categories'=>$this->getCategories(),'old'=>$this->getAllSites()]);
+        return view('sites',['sites'=>$res,'new'=>$this->newSite(),'categories'=>$this->getCategories(),'old'=>$this->getAllSites(),'search'=>' ']);
     }
     
     public function deleteCategory(Request $request){
