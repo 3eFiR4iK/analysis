@@ -196,7 +196,7 @@
                         <select class="select" name="category" style="width:100%">
                             <option disabled selected>выберете категорию</option>
                             @foreach($categories as $c)
-                            <option value="{{$c->id}}">{{$c->name_category}}</option>
+                            <option value="{{$c->id}}" access_kadet="{{$c->access}}" access_prepods="{{$c->access_prepods}}">{{$c->name_category}}</option>
                             @endforeach
                         </select>
                     </div>

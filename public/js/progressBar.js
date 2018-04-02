@@ -52,7 +52,7 @@ function main() {
                   <tr><td>искомое значение</td><td>категория</td><td>запрещенный для кадета</td><td>запрещенный для преподавателя</td><td>скрыть</td></tr>\n\
                 </thead>  \n\
                 <tbody><tr><td><input type="text" name="find"></td>\n\
-                <td><select name="categories" class="select">\n\
+                <td><select id="modalselect" name="categories" class="select">\n\
                              ' + $('select[name=category]').html() + '\n\
                 <td><input type="checkbox" name="access"></td>\n\
                 <td><input type="checkbox" name="access_prepods"></td>\n\
@@ -68,6 +68,7 @@ function main() {
         content: c
     });
     $(".select").select2();
+    checkin();
 }
 
 $(document).ready(function () {

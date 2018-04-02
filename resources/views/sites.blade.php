@@ -79,7 +79,23 @@
 
 </div>
 
-
+<script>
+    function checkin(){
+    $('#modalselect').on('select2:select', function (e) {
+                kadet = e.params.data.element.attributes.access_kadet.value;
+                prepod = e.params.data.element.attributes.access_prepods.value;
+                console.log(kadet);
+                if (kadet == 0) {
+                    $('input[name=access').attr('checked', '');
+                } else
+                    $('input[name=access]').removeAttr('checked');
+                if (prepod == 0) {
+                    $('input[name=access_prepods]').attr('checked', '');
+                } else
+                    $('input[name=access_prepods]').removeAttr('checked');
+            });
+    }
+</script>
 
 <script>
     $(document).ready(function () {
@@ -137,25 +153,11 @@
                 content: c
             });
             $(".select").select2();
-            
-            $('#modalselect').on('select2:select', function (e) {
-                kadet = e.params.data.element.attributes.access_kadet.value;
-                prepod = e.params.data.element.attributes.access_prepods.value;
-                console.log(kadet);
-                if (kadet == 0) {
-                    $('input[name=access').attr('checked', '');
-                } else
-                    $('input[name=access]').removeAttr('checked');
-                if (prepod == 0) {
-                    $('input[name=access_prepods]').attr('checked', '');
-                } else
-                    $('input[name=access_prepods]').removeAttr('checked');
+            checkin();
             });
-        });
-
-
     });
 </script>
 
 <script src="{{asset('js/progressBar.js')}}"></script>
+
 @endsection
