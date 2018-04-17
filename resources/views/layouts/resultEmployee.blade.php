@@ -9,6 +9,7 @@
                 <td>Название</td>
                 <td>Кабинет</td>
                 <td>Кол-во</td>
+                <td>затраченное время</td>
                 <td>Коментарий</td>
                 <td>Дата</td>
             </tr>
@@ -18,7 +19,8 @@
             <tr id="{{$uv->id}}" ondblclick="dbl($(this));">
                 <td id="event">{{$uv->event->name}}</td>
                 <td id="room">{{$uv->rooms->name}}</td>
-                <td id="count">{{$uv->count}}</td>
+                <td id="count">{{$uv->count}} {{$uv->event->nameCount}}</td>
+                <td id="time">{{$uv->time}}</td>
                 <td id="comment">{{$uv->comment}}</td>
                 <td id="date">{{$uv->date}}</td>
             </tr>
@@ -43,7 +45,11 @@
                       data: $('#updateForm').serialize(),
                       success: function(data){
                          $('[link = "'+window.link+'"]').click();
-                      }
+                         console.log(data);
+                      },
+                      error: function(data){console.log($('#updateForm').serialize());}
+                      
+                      
                   });
                  //$('#updateForm').submit();
                 }},
@@ -71,9 +77,11 @@
             var event = tr.find('#event').html();
             var room = tr.find('#room').html();
             var count = tr.find('#count').html();
+            count = parseInt(count.replace(/\D+/g,""))
             var comment = tr.find('#comment').html();
+            var time = tr.find('#time').html();
             var date = tr.find('#date').html();
-            console.log(comment);
+            console.log(count);
             $.ajax({
                 url: "/ajax",
                 type: "get",
@@ -85,6 +93,7 @@
                     tr.find('#count').empty();
                     tr.find('#comment').empty();
                     tr.find('#date').empty();
+                    tr.find('#time').empty();
                     
                     //------------event----------//
                     tr.find('#event').prepend("<select class='form-control select' name='event'>");
@@ -103,6 +112,7 @@
                     tr.find('#count').prepend('<input type="number" class="form-control" value="' + count + '" name="count"/>');
                     tr.find('#comment').prepend("<input type='text' class='form-control' value='" + comment + "' name='comment'/>");
                     tr.find('#date').prepend('<input type="date" class="form-control" value="' + date + '" name="date"/>');
+                    tr.find('#time').prepend('<input  type="time" class="form-control" value="'+ time +'" name="time"/>')
                     $('div.table-responsive > table').wrap("<form action='/journal/updateempl' method='post' id='updateForm'></form>");
                     tr.prepend("<input type='hidden' value='"+tr.attr('id')+"' name='id'> ");
                     tr.prepend('{{ csrf_field() }}');

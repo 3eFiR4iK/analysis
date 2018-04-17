@@ -47,6 +47,8 @@
                         <input type="text" class="form-control" name="comment"><br>
                         <label for="count">кол-во</label>
                         <input type="number" class="form-control" name="count"><br>
+                        <label for="time">затраченое время</label>
+                        <input  type="time" class="form-control" name="time"><br>
                         <label for="date" >дата</label>
                         <input type="date" class="form-control" name="date" required>
 

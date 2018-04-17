@@ -37,9 +37,11 @@ class UpdateController extends Controller
 
         if($request->input('date'))
             $res->date = $request->input('date');
+        if($request->input('time'))
+            $res->time = $request->input('time');
         
         $res->save();
-        //dump($res);dump($request);
+        //return dump($request);
 
         
         

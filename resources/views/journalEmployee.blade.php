@@ -13,6 +13,5 @@
     </div>
 </div>
 
-<div id="content"></div>
 
 @endsection

@@ -44,6 +44,7 @@ class JournalAddController extends Controller
               $user_event->count = $request->input('count');
               $user_event->date = $request->input('date');
               $user_event->comment = $request->input('comment');
+              $user_event->time = $request->input('time');
               $user_event->room_id = $request->input('idRoom');
               $user_event->save();
         }
@@ -57,6 +58,7 @@ class JournalAddController extends Controller
             'idEvent'  => 'bail|required',
             'idUser' => 'bail|required',
             'date' => 'bail|required',
+            'time' => 'bail|required',
             'idRoom' => 'bail|required',
             'count' => 'bail|required'
         ]

@@ -24,24 +24,24 @@
         <script src="{{asset('js/context-menu/dist/jquery.contextMenu.js')}}"></script>
         <script src="{{asset('js/context-menu/dist/jquery.ui.position.js')}}"></script>
         <!-- Scripts -->
-                <script type="text/javascript">
-              $(document).ready(function () {
-                 $( ".select" ).select2({
-                     theme: 'bootstrap'
-                 });
-                 $("select[name='idUser[]']").select2({
-                     placeholder: "Выберете сотрудника"
-                 });
-                 $("select[name='idCategory[]']").select2({
-                     placeholder: "Выберете категорию"
-                 });
-                 $("select[name='idEvent[]']").select2({
-                     placeholder: "Выберете действие"
-                 });
-                 $("select[name='idRoom[]']").select2({
-                     placeholder: "Выберете кабинет"
-                 });
-              });
+        <script type="text/javascript">
+            $(document).ready(function () {
+            $(".select").select2({
+            theme: 'bootstrap'
+            });
+            $("select[name='idUser[]']").select2({
+            placeholder: "Выберете сотрудника"
+            });
+            $("select[name='idCategory[]']").select2({
+            placeholder: "Выберете категорию"
+            });
+            $("select[name='idEvent[]']").select2({
+            placeholder: "Выберете действие"
+            });
+            $("select[name='idRoom[]']").select2({
+            placeholder: "Выберете кабинет"
+            });
+            });
         </script>
         <script>
             window.Laravel = {!! json_encode([
@@ -82,122 +82,130 @@
                     </ul>
                 </div>        
             </nav> 
-            <div class="col-md-2 left-menu">
-                <ul class="nav">
-                        <li class="nav-header">Главные ссылки</li>
-                        <li class="active"><a href="/journal/employee">Сотрудники</a></li>
-                        <li><a href="/journal/">Категории</a></li>
-                        <li><a href="/journal/edit">Редактирование</a></li>
-                        <li class="nav-divider"></li>
-                        <li><a href="/journal/word">Export to Word</a></li>
-                </ul>
-                </div>
-            <div class="col-md-10" style="margin-top:8vh">@yield('content')</div>
-</div>
- <!-- модальное окно -->
-    <div id="myModal" class="modal fade">
-        <form method="post" id="upload" action="/journal/addcategory">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Заголовок модального окна -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Введите категорию</h4>
+            <div class="row">
+                <div class="container-fluid">
+                    <div class="col-md-2 left-menu">
+                        <ul class="nav">
+                            <li class="nav-header">Главные ссылки</li>
+                            <li class="active"><a href="/journal/employee">Сотрудники</a></li>
+                            <li><a href="/journal/">Категории</a></li>
+                            <li><a href="/journal/edit">Редактирование</a></li>
+                            <li class="nav-divider"></li>
+                            <li><a href="/journal/word">Export to Word</a></li>
+                        </ul>
                     </div>
-                    <!-- Основное содержимое модального окна -->
-                    <div class="modal-body">
-                        <input type="text" class="form-control" name="nameCategory">
-                    </div>
-                    <!-- Футер модального окна -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        {{ csrf_field() }}
-                        
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
+                    <div class="col-md-10" style="margin-top:8vh">@yield('content')</div>
                 </div>
             </div>
-        </form>
-    </div>
- <div id="myModal2" class="modal fade">
-        <form method="post" id="upload" action="/journal/addcab">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Заголовок модального окна -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Введите название кабинета</h4>
-                    </div>
-                    <!-- Основное содержимое модального окна -->
-                    <div class="modal-body">
-                        <input type="text" class="form-control" name="nameCab">
-                    </div>
-                    <!-- Футер модального окна -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        {{ csrf_field() }}
-                        
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
+            <div class="row">
+                <div class="container-fluid">
+                    <div id="content"></div>
                 </div>
             </div>
-        </form>
-    </div>
- 
-    <div id="myModal3" class="modal fade">
-        <form method="post" id="upload" action="/journal/addevent">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Заголовок модального окна -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Введите действие</h4>
+            
+            <!-- модальное окно -->
+            <div id="myModal" class="modal fade">
+                <form method="post" id="upload" action="/journal/addcategory">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Заголовок модального окна -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Введите категорию</h4>
+                            </div>
+                            <!-- Основное содержимое модального окна -->
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="nameCategory">
+                            </div>
+                            <!-- Футер модального окна -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                {{ csrf_field() }}
+
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Основное содержимое модального окна -->
-                    <div class="modal-body">
-                        <input type="text" class="form-control" name="nameEvent"><br>
-                        <select name="idCategory" class="select">
-                            <option disabled selected>выберете категорию</option>
-                            @foreach($categories as $c)
-                              <option value="{{$c->id}}">{{$c->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <!-- Футер модального окна -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        {{ csrf_field() }}
-                        
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>
-    
-    
- 
+            <div id="myModal2" class="modal fade">
+                <form method="post" id="upload" action="/journal/addcab">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Заголовок модального окна -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Введите название кабинета</h4>
+                            </div>
+                            <!-- Основное содержимое модального окна -->
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="nameCab">
+                            </div>
+                            <!-- Футер модального окна -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                {{ csrf_field() }}
+
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="myModal3" class="modal fade">
+                <form method="post" id="upload" action="/journal/addevent">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Заголовок модального окна -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Введите действие</h4>
+                            </div>
+                            <!-- Основное содержимое модального окна -->
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="nameEvent"><br>
+                                <select name="idCategory" class="select">
+                                    <option disabled selected>выберете категорию</option>
+                                    @foreach($categories as $c)
+                                    <option value="{{$c->id}}">{{$c->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <!-- Футер модального окна -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                {{ csrf_field() }}
+
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
 
-<script>
-    window.link;
-    
-    $(document).ready(function(){
-      $('.list-group-item').click(function(){
-        href = $(this).attr('link');
-        window.link = $(this).attr('link');
-        $('#content').empty();
-        $.ajax({
-         url: href,
-         type: "get",
-         success: function(data){
-         $('#content').prepend(data);
-         }
-      });
-    });});
 
-</script>
-<!-- Scripts -->
 
-</body>
+
+            <script>
+                window.link;
+                $(document).ready(function(){
+                $('.list-group-item').click(function(){
+                href = $(this).attr('link');
+                window.link = $(this).attr('link');
+                $('#content').empty();
+                $.ajax({
+                url: href,
+                        type: "get",
+                        success: function(data){
+                        $('#content').prepend(data);
+                        }
+                });
+                }); });
+
+            </script>
+            <!-- Scripts -->
+
+    </body>
 </html>

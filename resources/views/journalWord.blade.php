@@ -35,7 +35,9 @@
         @foreach($rooms as $room)
         <option value="{{$room->id}}">{{$room->name}}</option>
         @endforeach
-    </select>
+    </select><br>
+    <label for="weekly">Недельный</label>
+    <input type="checkbox" name="weekly">
     {{csrf_field()}}
     <button class="btn btn-success" type="submit" style="width: 100%;margin:20px 0px; ">Сохранить</button>
 </form>
