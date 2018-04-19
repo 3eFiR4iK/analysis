@@ -19,7 +19,7 @@ class JournalExportController extends Controller {
 
     public function export(request $request) {
 
-      // dump($request);
+        //dump(substr('12:34:56', 3,2));
         $job = $this->filters($request);
         $wordcollection = collect();
         foreach ($job['data'] as $ev) {
@@ -37,16 +37,25 @@ class JournalExportController extends Controller {
         if ($request->input('weekly')) {
             $lastEvent='';
             $sum=0;
+            $hour=0;
+            $time=0;
+            $minute=0;
             $wordcollection = $wordcollection->sortBy('category')->groupBy('category');
            // dump($wordcollection);
             $final = [];
             foreach($wordcollection as $k =>$wc){
                 foreach($wc->sortBy('event')->groupBy('event') as $key => $w){
                     foreach ($w as $e){
-                        $sum += $e['count'];   
+                        $sum += $e['count'];  
+                        $hour+= substr($e['time'],0,2);
+                        $minute += substr($e['time'],3,2);
                     }   
-                  $final[$k][$key]=['count'=>$sum.' '.$e['namecount']]; 
+                  $time = $hour + (intdiv($minute, 60));
+                  $final[$k][$key]=['count'=>$sum.' '.$e['namecount'],'time'=>$time]; 
                   $sum=0;
+                  $time =0;
+                  $hour =0;
+                  $minute =0;
                 }
             }
             $word = $this->word($final,true);
@@ -106,15 +115,16 @@ class JournalExportController extends Controller {
         foreach ($events as $date => $users) {
             $section->addText(htmlspecialchars('Дата ' . $date), $fontStyle);
             foreach ($users as $name => $ev) {
-                $section->addText(htmlspecialchars($name), ['italic' => true, 'color' => '#17365d']);
+                $section->addText(htmlspecialchars($name), ['italic' => true,'bold' => true, 'color' => '#17365d']);
                 foreach ($ev as $e) {
                     if ($lastEvent != $e['event']) {
                         $section->addText(htmlspecialchars($e['event']), $fontStyle);
                     }
-                    $section->addText(htmlspecialchars(' - затрачено времени '
-                                    . $e['time'] . ' часа; сделано '
-                                    . $e['count'] . ' ' . $e['namecount'] .
-                                    '; комментарий: ' . $e['comment']), $text);
+                    $section->addText(htmlspecialchars(' - комментарий: ' . $e['comment']).
+                                    '; затрачено времени '
+                                    . substr($e['time'],0,5) . ' часа; сделано '
+                                    . $e['count'] . ' ' . $e['namecount'],$text
+                                    );
                 }
                 $section->addText("");
             }
@@ -130,7 +140,7 @@ class JournalExportController extends Controller {
         foreach($categories as $kc => $c){
             $section->addText(htmlspecialchars('4.' . $i . ' ' . $kc . ':'), $fontStyle);
             foreach ($c as $ke => $d){
-              $section->addListItem(htmlspecialchars($ke . ' - ' . $d['count']), 0, array(), $listStyle);
+              $section->addListItem(htmlspecialchars($ke . ' - ' . $d['count'].'; затрчено '.$d['time'].' час'), 0, array(), $listStyle);
             }
             $i++;
         }

@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/OpenServer/domains/analysis/app/Http/Controllers/SitesController.php</file>
-            <file>file:/C:/OpenServer/domains/analysis/resources/views/sites.blade.php</file>
-            <file>file:/C:/OpenServer/domains/analysis/.env</file>
+            <file>file:/C:/OpenServer/domains/analysis/app/Http/Controllers/JournalExportController.php</file>
+            <file>file:/C:/OpenServer/domains/analysis/resources/views/journalWord.blade.php</file>
+            <file>file:/C:/OpenServer/domains/analysis/app/Http/Controllers/UpdateController.php</file>
+            <file>file:/C:/OpenServer/domains/analysis/resources/views/layouts/resultEmployee.blade.php</file>
+            <file>file:/C:/OpenServer/domains/analysis/routes/web.php</file>
         </group>
     </open-files>
 </project-private>
