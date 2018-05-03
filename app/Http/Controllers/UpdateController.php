@@ -90,7 +90,8 @@ class UpdateController extends Controller
     protected function updateCategory($id,$name){
         $category = categories::find($id);
         $category->name = $name;
-        $category->save;
+        //dump($name);
+        $category->save();
     }
     protected function updateUser($id,$name){
         $user = users::find($id);
